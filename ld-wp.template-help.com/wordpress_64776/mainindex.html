@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahyram Martínez – Portfolio</title>
+<meta name="description" content="Ahyram Martínez – Science student from La Chorrera, Panama. Portfolio, certificates and projects.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+:root{
+    --accent:#3b55e6;
+    --accent-soft:#8293ff;
+    --ink:#171b2b;
+    --muted:#70788a;
+    --light:#f7f8fc;
+    --dark:#101626;
+    --border:rgba(255,255,255,.11);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    margin:0;
+    font-family:"Lato",Arial,sans-serif;
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink);
+    background:#fff;
+}
+h1,h2,h3,h4{font-family:"Montserrat",Arial,sans-serif}
+img,video{max-width:100%}
+a{color:inherit}
+.container{width:min(1120px,calc(100% - 48px));margin:0 auto}
+
+.site-header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    padding:20px 0;
+    transition:background .3s ease,box-shadow .3s ease,padding .3s ease;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{
+    color:#fff;
+    text-decoration:none;
+    font-family:"Montserrat",Arial,sans-serif;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+.brand span{color:var(--accent-soft)}
+.nav-links{display:flex;gap:32px;list-style:none;margin:0;padding:0}
+.nav-links a{
+    position:relative;
+    display:inline-block;
+    padding:6px 0;
+    color:#d5d9e6;
+    text-decoration:none;
+    font-family:"Montserrat",Arial,sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    transition:color .25s ease;
+}
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:0;
+    width:0;height:2px;
+    background:var(--accent-soft);
+    transition:width .25s ease;
+}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    color:#fff;
+    padding:80px 0;
+    background:
+        linear-gradient(rgba(16,22,38,.55),rgba(16,22,38,.8)),
+        url("photos/fondo-hero.jpg") center / cover no-repeat,
+        url("wp-content/uploads/2017/09/skin4-image-1.jpg") center / cover no-repeat,
+        #101626;
+}
+.hero h1{
+    margin:0;
+    font-size:clamp(34px,7vw,72px);
+    line-height:1.15;
+    letter-spacing:-.04em;
+    font-weight:700;
+    color:#fff;
+}
+.hero .hero-name{
+    display:block;
+    background:linear-gradient(to right,#3b55e6,#3ba0e6);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+}
+.hero p{
+    max-width:620px;
+    margin:18px 0 44px;
+    color:#d5d9e6;
+    font-size:17px;
+    line-height:1.8;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.2fr .8fr;
+    gap:50px;
+    align-items:center;
+}
+.hero-grid h1{font-size:clamp(34px,5vw,60px)}
+.hero-photo{
+    width:100%;
+    max-width:400px;
+    aspect-ratio:4 / 5;
+    justify-self:end;
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 30px 70px rgba(0,0,0,.35);
+}
+
+.photo-slot{
+    position:relative;
+    overflow:hidden;
+    border-radius:14px;
+    background:#eef0f7;
+}
+.photo-slot img{display:block;width:100%;height:100%;object-fit:cover}
+.photo-slot.missing{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    padding:20px;
+    text-align:center;
+    color:#9aa3b8;
+}
+.photo-slot.missing img{display:none}
+.photo-slot.missing::before{content:"\f030";font-family:FontAwesome;font-size:34px;color:#c3cae0}
+.photo-slot.missing::after{content:attr(data-hint);white-space:pre-line;font-size:11px;line-height:1.5}
+.hero-photo.missing{background:rgba(255,255,255,.07);color:#b6bdd0}
+.hero-photo.missing::before{color:#8293ff}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--accent);
+    color:#fff !important;
+    text-decoration:none !important;
+    padding:14px 28px;
+    border:0;
+    border-radius:5px;
+    font-family:"Montserrat",Arial,sans-serif;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.5px;
+    cursor:pointer;
+    transition:background .25s ease,transform .25s ease;
+}
+.btn:hover{background:#536cf5;transform:translateY(-2px)}
+
+.eyebrow{
+    display:inline-block;
+    color:var(--accent);
+    font-family:"Montserrat",Arial,sans-serif;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:16px;
+}
+.eyebrow--soft{color:var(--accent-soft)}
+
+.intro{background:var(--light);padding:85px 0 80px}
+.heading{text-align:center;max-width:760px;margin:0 auto 54px}
+.heading h2{
+    margin:0;
+    font-size:clamp(34px,5vw,52px);
+    line-height:1.15;
+    font-weight:700;
+    letter-spacing:-1.8px;
+}
+.heading h2 span{color:var(--accent)}
+.heading > p{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.9;
+    margin:19px auto 0;
+    max-width:640px;
+}
+.intro-grid{
+    display:grid;
+    grid-template-columns:1.15fr 1fr 1fr;
+    gap:20px;
+}
+.info-card{
+    background:#fff;
+    border:1px solid #e9ebf2;
+    border-radius:13px;
+    padding:31px 27px;
+    min-width:0;
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.info-card:hover{
+    transform:translateY(-5px);
+    border-color:#dce1ff;
+    box-shadow:0 15px 40px rgba(26,39,88,.07);
+}
+.info-card--lead{background:#eef1ff;border-color:#e3e7ff}
+.card-number{
+    display:block;
+    color:var(--accent);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:23px;
+}
+.info-card h3{font-size:21px;line-height:1.3;font-weight:700;margin:0 0 15px}
+.info-card--lead h3{font-size:24px}
+.info-card p{font-size:13.5px;line-height:1.9;color:var(--muted);margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tag{
+    padding:7px 11px;
+    border-radius:5px;
+    background:#f0f2f8;
+    color:#454e64;
+    font-size:11px;
+    font-weight:700;
+}
+
+.marquee{background:#111827;color:#fff;overflow:hidden;padding:21px 0;white-space:nowrap}
+.marquee-track{display:flex;width:max-content;animation:marquee 28s linear infinite}
+.marquee-track > span{
+    font-family:"Montserrat",Arial,sans-serif;
+    font-size:clamp(23px,4vw,39px);
+    font-weight:800;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    padding-right:45px;
+}
+.marquee-track .dot{color:var(--accent)}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+}
+
+.showcase{
+    background:
+        radial-gradient(ellipse at 50% 0%,rgba(59,85,230,.17),transparent 48%),
+        linear-gradient(rgba(16,22,38,.86),rgba(16,22,38,.94)),
+        url("photos/fondo-ideas.jpg") center / cover no-repeat,
+        var(--dark);
+    padding:85px 0 95px;
+    color:#fff;
+}
+.showcase-heading{text-align:center;max-width:680px;margin:0 auto 38px}
+.showcase-heading h2{font-size:clamp(30px,4vw,43px);font-weight:700;letter-spacing:-1.3px;line-height:1.2;color:#fff;margin:0}
+.showcase-heading p{color:#a9b1c5;font-size:14px;line-height:1.8;margin:15px 0 0}
+.video-container{
+    max-width:850px;
+    margin:0 auto 85px;
+    padding:9px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.13);
+    border-radius:17px;
+    box-shadow:0 25px 70px rgba(0,0,0,.28);
+}
+.video-container video{
+    display:block;
+    width:100%;
+    height:auto;
+    aspect-ratio:16 / 9;
+    object-fit:contain;
+    background:#05070c;
+    border-radius:10px;
+}
+.skills-heading{text-align:center;margin-bottom:38px}
+.skills-heading h3{color:#fff;font-size:28px;font-weight:700;letter-spacing:-.6px;margin:0 0 12px}
+.skills-heading p{color:#9da7bc;font-size:13px;margin:0}
+.skills-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.skill-card{
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:27px 25px;
+    min-height:190px;
+    transition:transform .3s ease,background .3s ease,border-color .3s ease;
+}
+.skill-card:hover{
+    transform:translateY(-5px);
+    background:rgba(59,85,230,.12);
+    border-color:rgba(104,125,255,.55);
+}
+.skill-icon{
+    width:41px;height:41px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(59,85,230,.16);
+    border-radius:9px;
+    margin-bottom:20px;
+}
+.skill-icon i{font-size:18px;color:var(--accent-soft)}
+.skill-card h4{color:#fff;font-size:16px;font-weight:700;margin:0 0 10px;line-height:1.4}
+.skill-card p{color:#a8b1c3;font-size:12.5px;line-height:1.8;margin:0}
+
+.experience{background:#fff;padding:90px 0}
+.experience-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:start;
+}
+.experience-photo{
+    border-radius:12px;
+    overflow:hidden;
+    background:linear-gradient(135deg,#3b55e6,#3ba0e6);
+    min-height:320px;
+}
+.experience-photo img{display:block;width:100%;height:auto}
+.experience-text h2{font-size:clamp(30px,4vw,40px);font-weight:700;letter-spacing:-.02em;margin:0 0 18px}
+.experience-text > p{color:#808080;margin:0}
+.timeline{margin-top:30px;padding-left:28px;border-left:2px solid #e3e6ef}
+.tl-item{position:relative;padding-bottom:30px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+    content:"";
+    position:absolute;
+    left:-35px;top:5px;
+    width:12px;height:12px;
+    border-radius:50%;
+    background:var(--accent);
+    border:3px solid #fff;
+    box-shadow:0 0 0 2px var(--accent);
+}
+.tl-date{font-family:"Montserrat",Arial,sans-serif;font-size:11px;font-weight:600;color:var(--accent);letter-spacing:1px;text-transform:uppercase}
+.tl-title{font-family:"Montserrat",Arial,sans-serif;font-size:18px;font-weight:600;line-height:1.35;margin:4px 0 8px}
+.tl-desc{font-size:14px;color:#808080;margin:0}
+
+.tl-item .tags{margin-top:12px}
+.tl-item .tag{font-size:10px;padding:6px 10px}
+
+.future{
+    padding:100px 0;
+    color:#fff;
+    background:
+        linear-gradient(rgba(16,22,38,.84),rgba(16,22,38,.92)),
+        url("photos/fondo-metas.jpg") center / cover no-repeat,
+        #101626;
+    background-attachment:scroll,fixed,scroll;
+}
+.future .skills-grid{margin-top:0}
+.future-note{
+    max-width:720px;
+    margin:55px auto 0;
+    text-align:center;
+    font-style:italic;
+    font-size:15px;
+    line-height:1.9;
+    color:#d5d9e6;
+}
+
+.projects{background:var(--dark);padding:90px 0 85px;color:#fff}
+.project-thumb{
+    aspect-ratio:16 / 10;
+    margin:-28px -25px 24px;
+    border-radius:12px 12px 0 0;
+    background:#202a42;
+}
+.project-thumb.missing{color:#7f8aa8}
+.project-thumb.missing::before{color:#4a5880}
+.section-heading{text-align:center;max-width:700px;margin:0 auto 50px}
+.section-heading h2{color:#fff;font-size:clamp(32px,4vw,45px);line-height:1.2;letter-spacing:-1.4px;font-weight:700;margin:0}
+.section-heading h2 span{color:var(--accent-soft)}
+.section-heading p{color:#a9b2c4;font-size:14px;line-height:1.9;margin:17px 0 0}
+.project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.project-card{
+    background:#171f32;
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:12px;
+    padding:28px 25px;
+    min-height:215px;
+    transition:transform .3s ease,background .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.project-card:hover{
+    transform:translateY(-6px);
+    background:#1b2740;
+    border-color:rgba(130,147,255,.45);
+    box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
+.project-type{
+    display:inline-block;
+    color:#a3b0ff;
+    background:rgba(59,85,230,.16);
+    padding:6px 10px;
+    border-radius:4px;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:23px;
+}
+.project-card h3{font-size:19px;font-weight:700;line-height:1.4;color:#fff;margin:0 0 12px}
+.project-card p{font-size:12.5px;line-height:1.85;color:#a7b0c3;margin:0}
+.project-cta{
+    margin-top:65px;
+    padding-top:35px;
+    border-top:1px solid rgba(255,255,255,.12);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+.project-cta h3{color:#fff;font-size:clamp(22px,3vw,30px);font-weight:600;margin:0}
+
+.contact{background:#f8f9fc;padding:90px 0;color:#202638}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:75px;align-items:start}
+.contact h2{font-size:33px;font-weight:700;letter-spacing:-1px;margin:0 0 20px}
+.contact-info > p{color:#7b8495;font-size:13.5px;line-height:1.9;margin:0 0 35px}
+.contact-detail{padding:17px 0;border-bottom:1px solid #e5e8f0}
+.contact-detail:last-child{border-bottom:none}
+.contact-detail span{display:block;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:2px;margin-bottom:8px}
+.contact-detail a,.contact-detail strong{color:#333c50;font-size:14px;font-weight:700;text-decoration:none;overflow-wrap:anywhere}
+.contact-detail a:hover{color:var(--accent)}
+.contact-form h2{margin-bottom:25px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-field{min-width:0}
+.form-field.full{grid-column:1 / -1}
+.form-field input,.form-field textarea{
+    width:100%;
+    border:1px solid #e3e6ed;
+    border-radius:5px;
+    background:#fff;
+    padding:15px 16px;
+    color:#252d40;
+    font-family:inherit;
+    font-size:13px;
+    outline:none;
+    transition:border-color .25s ease,box-shadow .25s ease;
+}
+.form-field input:focus,.form-field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,85,230,.08)}
+.form-field textarea{resize:vertical;min-height:150px}
+.form-field ::placeholder{color:#9ca4b2}
+.form-note{color:#8991a0;font-size:11px;line-height:1.7;margin:15px 0 0}
+
+.footer{background:#0c1220;padding:38px 0;color:#fff}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px}
+.footer-name{font-family:"Montserrat",Arial,sans-serif;font-size:17px;font-weight:800;letter-spacing:1.5px;margin:0}
+.footer-name span{color:var(--accent-soft)}
+.footer-copy{color:#8892a7;font-size:11px;margin-top:8px}
+.footer-links{display:flex;flex-wrap:wrap;gap:24px}
+.footer-links a{color:#c0c6d3;text-decoration:none;font-size:12px;transition:color .2s ease}
+.footer-links a:hover{color:var(--accent-soft)}
+
+.site-header.scrolled{
+    background:rgba(16,22,38,.92);
+    -webkit-backdrop-filter:blur(8px);
+    backdrop-filter:blur(8px);
+    box-shadow:0 4px 24px rgba(0,0,0,.25);
+    padding:12px 0;
+}
+
+.motion [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.motion [data-reveal].visible{opacity:1;transform:none}
+
+@media (max-width:900px){
+    .intro-grid,.skills-grid,.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .hero-photo{justify-self:start;max-width:320px}
+    .experience-grid{grid-template-columns:1fr;gap:40px}
+    .contact-grid{grid-template-columns:1fr;gap:45px}
+}
+@media (max-width:600px){
+    .brand{font-size:12px;letter-spacing:1px}
+    .nav-links{gap:20px}
+    .nav-links a{font-size:11px;letter-spacing:1px}
+    .container{width:calc(100% - 34px)}
+    .intro{padding:60px 0}
+    .heading{margin-bottom:32px}
+    .intro-grid,.skills-grid,.project-grid,.form-grid{grid-template-columns:1fr;gap:13px}
+    .form-field.full{grid-column:auto}
+    .info-card{padding:25px 23px}
+    .showcase{padding:62px 0 70px}
+    .video-container{margin-bottom:58px;padding:5px;border-radius:11px}
+    .skill-card{min-height:auto;padding:23px}
+    .marquee{padding:16px 0}
+    .experience,.projects,.contact,.future{padding:65px 0}
+    .future{background-attachment:scroll}
+    .project-cta{flex-direction:column;align-items:flex-start;margin-top:40px}
+    .footer-inner{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+        scroll-behavior:auto !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header" id="site-header">
+    <nav class="container nav-inner" aria-label="Main navigation">
+        <a href="mainindex.html"
+		 class="brand">AHYRAM <span>MARTÍNEZ</span></a>
+        <ul class="nav-links">
+            <li><a href="mainindex.html" class="active">Home</a></li>
+            <li><a href="aboutmereal.html">About Me</a></li>
+        </ul>
+    </nav>
+</header>
+
+<header class="hero" id="home">
+    <div class="container hero-grid">
+        <div>
+            <h1>
+                Greetings! I'm
+                <span class="hero-name">Ahyram Martínez</span>
+            </h1>
+            <p>
+                Aspiring engineer with a strong foundation in science, mathematics, and technology.
+                Experienced in academic projects, Python programming, and data analysis, with a passion
+                for problem-solving and continuous learning. Always looking for opportunities to grow,
+                collaborate, and create meaningful solutions.
+            </p>
+            <a href="#about" class="btn">SCROLL DOWN</a>
+        </div>
+
+        <div class="photo-slot hero-photo" data-hint="Tu foto principal:&#10;photos/hero.jpg">
+            <img src="ld-wp.template-help.com/wordpress_64776/img/meblack.png" alt="Ahyram Martínez" onerror="this.parentNode.classList.add('missing')">
+        </div>
+    </div>
+</header>
+
+<main>
+
+<section class="intro" id="about">
+    <div class="container">
+
+        <header class="heading" data-reveal>
+            <span class="eyebrow">GET TO KNOW ME</span>
+            <h2>Something About <span>Me</span></h2>
+            <p>
+                A science enthusiast with a passion for mathematics, technology, and engineering.
+                Driven by curiosity, analytical thinking, and the pursuit of knowledge.
+            </p>
+        </header>
+
+        <div class="intro-grid">
+
+            <article class="info-card info-card--lead" data-reveal>
+                <span class="card-number">01 / PROFILE</span>
+                <h3>Curiosity is what drives me.</h3>
+                <p>
+                    I’m passionate about science and technology, with an endless curiosity for
+                    discovering how things work. I enjoy challenging myself, exploring complex ideas,
+                    and turning knowledge into practical applications.
+                </p>
+            </article>
+
+            <article class="info-card" data-reveal>
+                <span class="card-number">02 / MY STORY</span>
+                <h3>Academic Background</h3>
+                <p>
+                    I’m a science student from La Chorrera, Panama, completing my education at
+                    Colegio Ingeniero Tomás Guardia while participating in ¡Supérate! Fundación
+                    Alberto Motta. My academic journey has strengthened my foundations in science,
+                    mathematics, English, and technology.
+                </p>
+            </article>
+
+            <article class="info-card" data-reveal>
+                <span class="card-number">03 / MY SKILLS</span>
+                <h3>Technical Foundations</h3>
+                <p>
+                    I combine analytical thinking with practical technical skills, continuously
+                    developing my abilities in programming, data analysis, and scientific problem-solving.
+                </p>
+                <div class="tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Excel Expert</span>
+                    <span class="tag">Physics</span>
+                    <span class="tag">Mathematics</span>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<div class="marquee" aria-label="Ahyram Martínez">
+    <div class="marquee-track" aria-hidden="true">
+        <span>AHYRAM MARTÍNEZ <span class="dot"> • </span> SCIENCE <span class="dot"> • </span> TECHNOLOGY <span class="dot"> • </span> ENGINEERING <span class="dot"> • </span></span>
+        <span>AHYRAM MARTÍNEZ <span class="dot"> • </span> SCIENCE <span class="dot"> • </span> TECHNOLOGY <span class="dot"> • </span> ENGINEERING <span class="dot"> • </span></span>
+    </div>
+</div>
+
+<section class="showcase">
+    <div class="container">
+
+        <header class="showcase-heading" data-reveal>
+            <span class="eyebrow eyebrow--soft">BEYOND THE CLASSROOM</span>
+            <h2>Ideas into Practice.</h2>
+            <p>
+                I believe knowledge becomes more valuable when it is applied. Here's a glimpse into
+                my journey, interests, and approach to learning.
+            </p>
+        </header>
+
+        <div class="video-container" data-reveal>
+            <video controls playsinline preload="metadata"
+                   poster="ld-wp.template-help.com/wordpress_64776/img/port.png"
+                   aria-label="Ahyram Martínez portfolio presentation">
+                <source src="ld-wp.template-help.com/wordpress_64776/img/Portfolio.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+
+        <div class="skills-heading" data-reveal>
+            <span class="eyebrow eyebrow--soft">WHAT I BRING</span>
+            <h3>Areas of Expertise</h3>
+            <p>The skills and interests that shape my approach to science, technology, and problem-solving.</p>
+        </div>
+
+        <div class="skills-grid">
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-camera" aria-hidden="true"></i></div>
+                <h4>Scientific Documentation</h4>
+                <p>I document experiments and projects, paying attention to details and the evidence behind every result.</p>
+            </article>
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-font" aria-hidden="true"></i></div>
+                <h4>Critical Thinking</h4>
+                <p>I analyze information and situations from multiple perspectives to make informed decisions and solve problems.</p>
+            </article>
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-bookmark" aria-hidden="true"></i></div>
+                <h4>Research &amp; Learning</h4>
+                <p>I study mathematics and physics on my own, from calculus to electromagnetism, because I want to understand the principles behind the results, not just memorize formulas.</p>
+            </article>
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-rocket" aria-hidden="true"></i></div>
+                <h4>Programming &amp; Technology</h4>
+                <p>I use Python and digital tools to explore ideas, develop technical skills, and approach problems through technology.</p>
+            </article>
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-file-image-o" aria-hidden="true"></i></div>
+                <h4>Project Development</h4>
+                <p>I build prototypes, work with electronic components, document experiments, and analyze results, learning to plan, test, adapt, and learn from mistakes.</p>
+            </article>
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+                <h4>Data Analysis</h4>
+                <p>Excel Expert certified, with skills in organizing, processing, and interpreting data to generate meaningful insights.</p>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<section class="experience" id="experience">
+    <div class="container experience-grid">
+
+        <div class="experience-photo" data-reveal>
+            <img src="ld-wp.template-help.com\wordpress_64776\img\mecolor.png" alt="Ahyram Martínez"
+                 width="486" height="636" loading="lazy"
+                 onerror="this.style.display='none'">
+        </div>
+
+        <div class="experience-text" data-reveal>
+            <span class="eyebrow" style="color:#adadad">PRESENTATION</span>
+            <h2>My Experience</h2>
+            <p>
+                My journey combines academic development, professional exposure, and a constant desire
+                to learn. Throughout my education, I have explored science, technology, and business
+                while developing the skills and discipline to pursue my professional goals.
+            </p>
+
+            <div class="timeline">
+
+                <div class="tl-item">
+                    <div class="tl-date">Mar 2024 – Dec 2026</div>
+                    <div class="tl-title">Science Student at Colegio Ingeniero Tomás Guardia (2024–2026)</div>
+                    <p class="tl-desc">Completing a High School Diploma in Science, building a foundation in mathematics, physics, chemistry, and scientific reasoning. My interests go beyond the curriculum, toward calculus, advanced mathematics, physics, and engineering, which has strengthened my analytical skills and independent learning habits.</p>
+                </div>
+
+                <div class="tl-item">
+                    <div class="tl-date">Jan 2024 – Dec 2026</div>
+                    <div class="tl-title">Student at ¡Supérate! Fundación Alberto Motta (2024–2026)</div>
+                    <p class="tl-desc">A complementary program in English, technology, and values: language proficiency and communication, digital skills with Microsoft Excel and Python, and leadership, teamwork, responsibility, and resilience.</p>
+                    <div class="tags">
+                        <span class="tag">English</span>
+                        <span class="tag">Technology</span>
+                        <span class="tag">Values</span>
+                    </div>
+                </div>
+
+                <div class="tl-item">
+                    <div class="tl-date">Dec 2025 – Jan 2026</div>
+                    <div class="tl-title">Customer Service Intern at ASSA Compañía de Seguros (Dec 2025 – Jan 2026)</div>
+                    <p class="tl-desc">Two-month, in-person internship under a training agreement. My first exposure to a corporate environment, with a closer look at customer service operations, professional communication, and responsibility within an organization.</p>
+                    <div class="tags">
+                        <span class="tag">Customer service</span>
+                        <span class="tag">Professional conduct</span>
+                        <span class="tag">Corporate operations</span>
+                        <span class="tag">Interpersonal skills</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="future" id="future">
+    <div class="container">
+
+        <header class="section-heading" data-reveal>
+            <span class="eyebrow eyebrow--soft">LOOKING AHEAD</span>
+            <h2>What Comes <span>Next</span></h2>
+            <p>
+                My immediate academic goal is to pursue Electrical and Electronic Engineering. In the
+                long term, I want to go deeper into physics and keep growing my mathematical and
+                scientific knowledge.
+            </p>
+        </header>
+
+        <div class="skills-grid">
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-bolt" aria-hidden="true"></i></div>
+                <h4>Electrical &amp; Electronic Engineering</h4>
+                <p>Especially drawn to electromagnetism, electrical systems, and how theoretical physics connects to practical engineering.</p>
+            </article>
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-flask" aria-hidden="true"></i></div>
+                <h4>Physics &amp; Mathematics</h4>
+                <p>I study calculus and other advanced mathematics on my own, wanting to understand why something works and not only how to apply it.</p>
+            </article>
+
+            <article class="skill-card" data-reveal>
+                <div class="skill-icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+                <h4>Engineering, Research &amp; Education</h4>
+                <p>I like sharing what I learn, because explaining complex ideas demands a deeper understanding of the subject itself.</p>
+            </article>
+
+        </div>
+
+        <p class="future-note" data-reveal>
+            Ultimately, I want my journey to be defined not only by the qualifications I obtain, but
+            also by the knowledge I develop, the projects I contribute to, and the impact I can have
+            through what I learn and share.
+        </p>
+
+    </div>
+</section>
+
+<section class="projects" id="certificates-projects">
+    <div class="container">
+
+        <header class="section-heading" data-reveal>
+            <span class="eyebrow eyebrow--soft">SELECTED WORK &amp; ACHIEVEMENTS</span>
+            <h2>Certificates <span>&amp; Projects</span></h2>
+            <p>
+                A selection of my academic projects, technical development, and professional
+                certifications. Each represents another step in my learning journey.
+            </p>
+        </header>
+
+        <div class="project-grid">
+
+            <article class="project-card" data-reveal>
+                <div class="photo-slot project-thumb" data-hint="Foto del prototipo:&#10;photos/eolica.jpg">
+                    <img src="photos/eolica.jpg" alt="Wind energy prototype" loading="lazy" onerror="this.parentNode.classList.add('missing')">
+                </div>
+                <span class="project-type">Engineering Project</span>
+                <h3>Wind Energy Generation</h3>
+                <p>Developed a small-scale wind energy generation prototype, exploring electrical generation, energy storage, and voltage conversion.</p>
+            </article>
+
+            <article class="project-card" data-reveal>
+                <div class="photo-slot project-thumb" data-hint="Foto del juego:&#10;photos/struggle.jpg">
+                    <img src="photos/struggle.jpg" alt="Struggle board game" loading="lazy" onerror="this.parentNode.classList.add('missing')">
+                </div>
+                <span class="project-type">Academic Project</span>
+                <h3>Struggle — Board Game</h3>
+                <p>Designed an educational board game simulating career paths, financial decisions, education, and different aspects of adult life.</p>
+            </article>
+
+            <article class="project-card" data-reveal>
+                <span class="project-type">Certification</span>
+                <h3>TOEIC — 875</h3>
+                <p>Achieved a TOEIC score of 875, demonstrating English language proficiency in a standardized assessment.</p>
+            </article>
+
+            <article class="project-card" data-reveal>
+                <span class="project-type">Certification</span>
+                <h3>Microsoft Excel Expert</h3>
+                <p>Certified in advanced spreadsheet skills, data management, and productivity tools using Microsoft Excel.</p>
+            </article>
+
+            <article class="project-card" data-reveal>
+                <span class="project-type">Certification</span>
+                <h3>Microsoft Excel Specialist</h3>
+                <p>Demonstrated practical knowledge of spreadsheet tools, formulas, and structured data management.</p>
+            </article>
+
+            <article class="project-card" data-reveal>
+                <span class="project-type">Technical Training</span>
+                <h3>Python Essentials 1</h3>
+                <p>Developed foundational programming knowledge through Python, including fundamental concepts and logical thinking.</p>
+            </article>
+
+        </div>
+
+        <div class="project-cta" data-reveal>
+            <h3>Have an opportunity in mind?</h3>
+            <a href="#contact" class="btn">LET'S CONNECT &rarr;</a>
+        </div>
+
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="container contact-grid">
+
+        <div class="contact-info" data-reveal>
+            <span class="eyebrow">GET IN TOUCH</span>
+            <h2>Contact Me</h2>
+            <p>
+                Have a question, an interesting opportunity, or an idea for collaboration? I’d be glad
+                to hear from you. I'm always open to connecting with people and exploring opportunities
+                in science, technology, and engineering.
+            </p>
+
+            <div class="contact-detail">
+                <span>LOCATION</span>
+                <strong>La Chorrera, Panama</strong>
+            </div>
+
+            <div class="contact-detail">
+                <span>EMAIL</span>
+                <a href="mailto:riemann22am@gmail.com">riemann22am@gmail.com</a>
+            </div>
+
+            <div class="contact-detail">
+                <span>LINKEDIN</span>
+                <a href="https://www.linkedin.com/in/ahyram-mart%C3%ADnez-n%C3%BA%C3%B1ez-3a193b40a/"
+                   target="_blank" rel="noopener noreferrer">Connect with me on LinkedIn &rarr;</a>
+            </div>
+        </div>
+
+        <div class="contact-form" data-reveal>
+            <span class="eyebrow">START A CONVERSATION</span>
+            <h2>Send a Message</h2>
+
+            <form id="contact-form">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" name="email" placeholder="Your email address" autocomplete="email" required>
+                    </div>
+                    <div class="form-field full">
+                        <input type="text" name="subject" placeholder="Subject" required>
+                    </div>
+                    <div class="form-field full">
+                        <textarea name="message" placeholder="Write your message..." required></textarea>
+                    </div>
+                    <div class="form-field full">
+                        <button type="submit" class="btn">SEND MESSAGE &rarr;</button>
+                    </div>
+                </div>
+            </form>
+
+            <p class="form-note">
+                Submitting this form opens your email application with your message prepared for sending.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <div>
+            <p class="footer-name">AHYRAM <span>MARTÍNEZ</span></p>
+            <div class="footer-copy">
+                &copy; <span id="current-year">2026</span> Ahyram Martínez. All rights reserved.
+            </div>
+        </div>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+            <a href="#certificates-projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <a href="https://www.linkedin.com/in/ahyram-mart%C3%ADnez-n%C3%BA%C3%B1ez-3a193b40a/"
+               target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:riemann22am@gmail.com">Email</a>
+        </nav>
+    </div>
+</footer>
+
+<script>
+var header = document.getElementById("site-header");
+var year = document.getElementById("current-year");
+var form = document.getElementById("contact-form");
+var items = document.querySelectorAll("[data-reveal]");
+
+if (year) { year.textContent = new Date().getFullYear(); }
+
+function updateHeader() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if (y > 40) {
+        header.classList.add("scrolled");
+    } else {
+        header.classList.remove("scrolled");
+    }
+}
+window.addEventListener("scroll", updateHeader);
+window.addEventListener("resize", updateHeader);
+updateHeader();
+
+var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!("IntersectionObserver" in window) || reduceMotion) {
+    for (var i = 0; i < items.length; i++) {
+        items[i].classList.add("visible");
+    }
+} else {
+    document.body.classList.add("motion");
+    var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+    items.forEach(function (el) { observer.observe(el); });
+}
+
+if (form) {
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        var data = new FormData(form);
+        var body = "Name: " + data.get("name") + "\n" +
+                   "Email: " + data.get("email") + "\n\n" +
+                   "Message:\n" + data.get("message");
+
+        console.log("abriendo correo...");
+        window.location.href = "mailto:riemann22am@gmail.com?subject=" + encodeURIComponent(data.get("subject")) + "&body=" + encodeURIComponent(body);
+    });
+}
+</script>
+
+</body>
+</html>
