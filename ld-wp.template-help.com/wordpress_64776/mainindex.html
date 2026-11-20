@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
   --ink:#0f1218; --ink-2:#171b23; --ink-3:#1f242e;
@@ -16,284 +17,1244 @@
   --gold:#b8995a; --gold-2:#dcc794;
   --text:#2a2e37; --muted:#6c717d; --line:rgba(15,18,24,.1);
   --ease:cubic-bezier(.22,.61,.36,1);
-  --serif:'Playfair Display',Georgia,serif; --sans:'Inter','Helvetica Neue',Arial,sans-serif;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Inter','Helvetica Neue',Arial,sans-serif;
   --max:1180px;
 }
+
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{font-family:var(--sans);color:var(--text);background:var(--white);line-height:1.75;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+
+body{
+  font-family:var(--sans);
+  color:var(--text);
+  background:var(--white);
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden
+}
+
 img,video{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 ul{list-style:none}
+button{font:inherit;color:inherit}
 ::selection{background:var(--gold);color:#fff}
-.container{width:min(var(--max),100% - 48px);margin-inline:auto}
+.container{width:min(var(--max),calc(100% - 48px));margin-inline:auto}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
-/* progress */
-#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;background:linear-gradient(90deg,var(--gold),var(--gold-2))}
+#progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  width:0;
+  z-index:300;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2))
+}
 
-/* header */
-.topbar{background:var(--ink);color:#cfcbc0;font-size:.78rem;letter-spacing:.06em}
-.topbar .container{display:flex;justify-content:space-between;gap:16px;padding:10px 0;flex-wrap:wrap}
-.topbar a:hover{color:var(--gold-2)}
-.topbar span+span,.topbar a+a{margin-left:22px}
-header.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);transition:background .4s,box-shadow .4s}
-header.nav.scrolled{background:rgba(15,18,24,.88);box-shadow:0 10px 40px rgba(0,0,0,.2);border-color:transparent}
-.nav .container{display:flex;align-items:center;justify-content:space-between;height:76px}
-.logo img{height:34px;width:auto;transition:transform .4s var(--ease)}
+/* =========================================
+   HEADER — SAME AS ABOUT-ME PAGE
+========================================= */
+
+header.nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+  background:transparent;
+  transition:background .4s,box-shadow .4s
+}
+
+header.nav.scrolled{
+  background:rgba(15,18,24,.9);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  box-shadow:0 10px 40px rgba(0,0,0,.25)
+}
+
+.nav .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:78px
+}
+
+.logo img{
+  height:34px;
+  width:auto;
+  transition:transform .4s var(--ease)
+}
+
 .logo:hover img{transform:scale(1.05)}
-.nav ul{display:flex;gap:34px}
-.nav ul a{font-size:.78rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);position:relative;padding:6px 0;transition:color .3s}
-.nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--gold);transition:width .35s var(--ease)}
-.nav ul a:hover,.nav ul a.active{color:var(--gold)}
-.nav ul a:hover::after,.nav ul a.active::after{width:100%}
-header.nav.scrolled ul a{color:#fff}
-header.nav.scrolled ul a:hover,header.nav.scrolled ul a.active{color:var(--gold-2)}
-.burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;position:relative}
-.burger span,.burger span::before,.burger span::after{display:block;position:absolute;left:8px;right:8px;height:2px;background:var(--ink);transition:.3s}
-.burger span{top:19px}.burger span::before{content:"";top:-7px;left:0;right:0}.burger span::after{content:"";top:7px;left:0;right:0}
-header.nav.scrolled .burger span,header.nav.scrolled .burger span::before,header.nav.scrolled .burger span::after{background:#fff}
 
-/* hero */
-.hero{position:relative;min-height:calc(100vh - 110px);display:flex;align-items:center;color:#fff;background:var(--ink);overflow:hidden;isolation:isolate}
-.hero-bg{position:absolute;inset:-6% 0;background:url("wp-content/uploads/2017/09/skin4-image-1.jpg") center/cover no-repeat;z-index:-2;will-change:transform}
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(15,18,24,.92) 0%,rgba(15,18,24,.7) 55%,rgba(15,18,24,.45) 100%)}
+.nav ul{
+  display:flex;
+  gap:32px;
+  list-style:none;
+  margin:0;
+  padding:0
+}
+
+.nav ul a{
+  font-size:.76rem;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:#e7e4dc;
+  position:relative;
+  padding:6px 0;
+  transition:color .3s
+}
+
+.nav ul a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:2px;
+  width:0;
+  background:var(--gold);
+  transition:width .35s var(--ease)
+}
+
+.nav ul a:hover,
+.nav ul a.active{color:var(--gold-2)}
+
+.nav ul a:hover::after,
+.nav ul a.active::after{width:100%}
+
+.burger{
+  display:none;
+  background:none;
+  border:0;
+  width:40px;
+  height:40px;
+  cursor:pointer;
+  position:relative
+}
+
+.burger span,
+.burger span::before,
+.burger span::after{
+  display:block;
+  position:absolute;
+  left:8px;
+  right:8px;
+  height:2px;
+  background:#fff;
+  transition:.3s
+}
+
+.burger span{top:19px}
+
+.burger span::before{
+  content:"";
+  top:-7px;
+  left:0;
+  right:0
+}
+
+.burger span::after{
+  content:"";
+  top:7px;
+  left:0;
+  right:0
+}
+
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{
+  top:0;
+  transform:rotate(45deg)
+}
+.burger[aria-expanded="true"] span::after{
+  top:0;
+  transform:rotate(-45deg)
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  color:#fff;
+  background:var(--ink);
+  overflow:hidden;
+  isolation:isolate
+}
+
+.hero-bg{
+  position:absolute;
+  inset:-6% 0;
+  background:url("wp-content/uploads/2017/06/focuseado.png") center/cover no-repeat;
+  z-index:-2;
+  will-change:transform
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(
+    100deg,
+    rgba(15,18,24,.92) 0%,
+    rgba(15,18,24,.7) 55%,
+    rgba(15,18,24,.45) 100%
+  )
+}
+
 .hero .container{padding:120px 0 140px}
-.eyebrow{display:inline-flex;align-items:center;gap:14px;font-size:.74rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2)}
-.eyebrow::before{content:"";width:42px;height:1px;background:var(--gold)}
-.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(2.8rem,7.4vw,6rem);line-height:1.05;letter-spacing:-.02em;margin:22px 0 26px}
-.hero h1 em{font-style:italic;font-weight:500;background:linear-gradient(90deg,var(--gold-2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;display:block}
-.hero p{max-width:620px;font-size:1.1rem;font-weight:300;color:#d9d6cd;line-height:1.85}
-.hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;border-radius:999px;font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border:1px solid var(--gold);cursor:pointer;font-family:var(--sans);transition:transform .3s var(--ease),box-shadow .3s,background .3s,color .3s}
-.btn-gold{background:var(--gold);color:var(--ink);box-shadow:0 12px 32px rgba(184,153,90,.35)}
-.btn-gold:hover{background:transparent;color:var(--gold-2);transform:translateY(-3px)}
-.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
-.btn-ghost:hover{border-color:var(--gold-2);color:var(--gold-2);transform:translateY(-3px)}
-.scroll-cue{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:#bfbbb0}
-.scroll-cue i{width:1px;height:44px;background:linear-gradient(var(--gold),transparent);animation:cue 2s infinite}
-@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* sections */
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  font-size:.74rem;
+  font-weight:500;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gold-2)
+}
+
+.eyebrow::before{
+  content:"";
+  width:42px;
+  height:1px;
+  background:var(--gold)
+}
+
+.hero h1{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:clamp(2.8rem,7.4vw,6rem);
+  line-height:1.05;
+  letter-spacing:-.02em;
+  margin:22px 0 26px
+}
+
+.hero h1 em{
+  font-style:italic;
+  font-weight:500;
+  background:linear-gradient(90deg,var(--gold-2),var(--gold));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  display:block
+}
+
+.hero p{
+  max-width:620px;
+  font-size:1.1rem;
+  font-weight:300;
+  color:#d9d6cd;
+  line-height:1.85
+}
+
+.hero-cta{
+  display:flex;
+  gap:16px;
+  margin-top:44px;
+  flex-wrap:wrap
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:16px 36px;
+  border-radius:999px;
+  font-size:.76rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  border:1px solid var(--gold);
+  cursor:pointer;
+  font-family:var(--sans);
+  transition:transform .3s var(--ease),box-shadow .3s,background .3s,color .3s
+}
+
+.btn-gold{
+  background:var(--gold);
+  color:var(--ink);
+  box-shadow:0 12px 32px rgba(184,153,90,.35)
+}
+
+.btn-gold:hover{
+  background:transparent;
+  color:var(--gold-2);
+  transform:translateY(-3px)
+}
+
+.btn-ghost{
+  background:transparent;
+  color:#fff;
+  border-color:rgba(255,255,255,.4)
+}
+
+.btn-ghost:hover{
+  border-color:var(--gold-2);
+  color:var(--gold-2);
+  transform:translateY(-3px)
+}
+
+.scroll-cue{
+  position:absolute;
+  left:50%;
+  bottom:34px;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  font-size:.66rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:#bfbbb0
+}
+
+.scroll-cue i{
+  width:1px;
+  height:44px;
+  background:linear-gradient(var(--gold),transparent);
+  animation:cue 2s infinite
+}
+
+@keyframes cue{
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* =========================================
+   GENERAL SECTIONS
+========================================= */
+
 section{padding:112px 0}
-.sec-head{text-align:center;max-width:720px;margin:0 auto 64px}
-.sec-head .kicker{font-size:.72rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
-h2{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,3.6vw,3rem);line-height:1.2;letter-spacing:-.01em;color:var(--ink);margin-top:12px}
-h2::after{content:"";display:block;width:54px;height:2px;margin:20px auto 0;background:linear-gradient(90deg,var(--gold),var(--gold-2))}
+
+.sec-head{
+  text-align:center;
+  max-width:720px;
+  margin:0 auto 64px
+}
+
+.sec-head .kicker{
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--gold)
+}
+
+h2{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:clamp(2rem,3.6vw,3rem);
+  line-height:1.2;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  margin-top:12px
+}
+
+h2::after{
+  content:"";
+  display:block;
+  width:54px;
+  height:2px;
+  margin:20px auto 0;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2))
+}
+
 .left h2::after{margin-left:0}
 h2 span{color:var(--gold)}
 .dark h2{color:#fff}
 
-/* about */
+/* =========================================
+   ABOUT
+========================================= */
+
 .about{background:var(--white)}
-.about-grid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:48px}
-.about-grid h4{font-size:.78rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-.about-grid .lead{font-family:var(--serif);font-style:italic;font-size:1.5rem;line-height:1.4;color:var(--ink);margin-bottom:16px}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr 1fr;
+  gap:48px
+}
+
+.about-grid h4{
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line)
+}
+
+.about-grid .lead{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.5rem;
+  line-height:1.4;
+  color:var(--ink);
+  margin-bottom:16px
+}
+
 .skills{counter-reset:s}
-.skills li{counter-increment:s;display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
-.skills li::before{content:"0" counter(s);font-family:var(--serif);color:var(--gold);font-weight:600}
 
-/* marquee */
-.marquee{background:var(--paper);overflow:hidden;padding:34px 0;border-block:1px solid var(--line)}
-.marquee-track{display:flex;width:max-content;animation:slide 40s linear infinite}
-.marquee-track span{font-family:var(--serif);font-size:clamp(3rem,8vw,6.5rem);font-weight:700;color:transparent;-webkit-text-stroke:1px rgba(15,18,24,.25);padding-right:60px;white-space:nowrap;letter-spacing:.02em}
-.marquee-track span::after{content:"✦";color:var(--gold);-webkit-text-stroke:0;padding-left:60px;font-size:.5em;vertical-align:middle}
-@keyframes slide{to{transform:translateX(-50%)}}
+.skills li{
+  counter-increment:s;
+  display:flex;
+  gap:16px;
+  padding:14px 0;
+  border-bottom:1px solid var(--line)
+}
 
-/* showcase / video + expertise */
-.showcase{position:relative;color:#fff;background:var(--ink);isolation:isolate;padding-bottom:120px}
-.showcase::before{content:"";position:absolute;inset:0;z-index:-2;background:url("wp-content/uploads/2017/06/skin4-image-3b4f6.jpg") center/cover no-repeat}
-.showcase::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(15,18,24,.88),rgba(15,18,24,.94))}
-.video-wrap{max-width:900px;margin:0 auto 90px;border-radius:16px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.1);background:#000}
-.video-wrap video{width:100%;height:auto;display:block}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:38px 32px;transition:transform .45s var(--ease),border-color .45s,background .45s,box-shadow .45s;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.card:hover{transform:translateY(-8px);border-color:var(--gold);background:rgba(255,255,255,.07);box-shadow:0 26px 60px rgba(0,0,0,.35)}
-.card .ico{width:54px;height:54px;border-radius:14px;display:grid;place-items:center;margin-bottom:24px;color:var(--gold-2);background:rgba(184,153,90,.12);border:1px solid rgba(184,153,90,.35)}
-.card .ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.card h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:#fff;margin-bottom:12px}
-.card p{font-size:.95rem;font-weight:300;color:#c9c6bd;line-height:1.75}
+.skills li::before{
+  content:"0" counter(s);
+  font-family:var(--serif);
+  color:var(--gold);
+  font-weight:600
+}
 
-/* experience */
+/* =========================================
+   MARQUEE
+========================================= */
+
+.marquee{
+  background:var(--paper);
+  overflow:hidden;
+  padding:34px 0;
+  border-block:1px solid var(--line)
+}
+
+.marquee-track{
+  display:flex;
+  width:max-content;
+  animation:slide 40s linear infinite
+}
+
+.marquee-track span{
+  font-family:var(--serif);
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:700;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(15,18,24,.25);
+  padding-right:60px;
+  white-space:nowrap;
+  letter-spacing:.02em
+}
+
+.marquee-track span::after{
+  content:"✦";
+  color:var(--gold);
+  -webkit-text-stroke:0;
+  padding-left:60px;
+  font-size:.5em;
+  vertical-align:middle
+}
+
+@keyframes slide{
+  to{transform:translateX(-50%)}
+}
+
+/* =========================================
+   SHOWCASE / VIDEO + EXPERTISE
+========================================= */
+
+.showcase{
+  position:relative;
+  color:#fff;
+  background:var(--ink);
+  isolation:isolate;
+  padding-bottom:120px
+}
+
+.showcase::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  background:url("wp-content/uploads/2017/06/skin4-image-3b4f6.jpg") center/cover no-repeat
+}
+
+.showcase::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(
+    180deg,
+    rgba(15,18,24,.88),
+    rgba(15,18,24,.94)
+  )
+}
+
+.video-wrap{
+  position:relative;
+  width:100%;
+  max-width:900px;
+  aspect-ratio:16/9;
+  margin:0 auto 90px;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 40px 90px rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.1);
+  background:#000
+}
+
+.video-wrap iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px
+}
+
+.card{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  padding:38px 32px;
+  transition:transform .45s var(--ease),border-color .45s,background .45s,box-shadow .45s;
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px)
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  border-color:var(--gold);
+  background:rgba(255,255,255,.07);
+  box-shadow:0 26px 60px rgba(0,0,0,.35)
+}
+
+.card .ico{
+  width:54px;
+  height:54px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  margin-bottom:24px;
+  color:var(--gold-2);
+  background:rgba(184,153,90,.12);
+  border:1px solid rgba(184,153,90,.35)
+}
+
+.card .ico svg{
+  width:24px;
+  height:24px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round
+}
+
+.card h3{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  font-weight:600;
+  color:#fff;
+  margin-bottom:12px
+}
+
+.card p{
+  font-size:.95rem;
+  font-weight:300;
+  color:#c9c6bd;
+  line-height:1.75
+}
+
+/* =========================================
+   EXPERIENCE
+========================================= */
+
 .experience{background:var(--paper)}
-.exp-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
-.portrait{position:sticky;top:110px}
-.portrait img{width:100%;border-radius:16px;box-shadow:0 30px 70px rgba(15,18,24,.25)}
-.portrait::before{content:"";position:absolute;inset:22px -22px -22px 22px;border:1px solid var(--gold);border-radius:16px;z-index:-1}
-.exp-text .kicker{font-size:.72rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+
+.exp-grid{
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:80px;
+  align-items:start
+}
+
+.portrait{
+  position:sticky;
+  top:110px
+}
+
+.portrait img{
+  width:100%;
+  border-radius:16px;
+  box-shadow:0 30px 70px rgba(15,18,24,.25)
+}
+
+.portrait::before{
+  content:"";
+  position:absolute;
+  inset:22px -22px -22px 22px;
+  border:1px solid var(--gold);
+  border-radius:16px;
+  z-index:-1
+}
+
+.exp-text .kicker{
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--gold)
+}
+
 .exp-text>p{margin:24px 0 40px}
-.timeline{position:relative;padding-left:38px}
-.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--gold),rgba(184,153,90,.15))}
-.tl-item{position:relative;padding-bottom:38px}
+
+.timeline{
+  position:relative;
+  padding-left:38px
+}
+
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:7px;
+  top:6px;
+  bottom:6px;
+  width:1px;
+  background:linear-gradient(var(--gold),rgba(184,153,90,.15))
+}
+
+.tl-item{
+  position:relative;
+  padding-bottom:38px
+}
+
 .tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:"";position:absolute;left:-38px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 6px rgba(184,153,90,.2)}
-.tl-date{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-.tl-item h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--ink);margin:6px 0 8px;line-height:1.3}
+
+.tl-item::before{
+  content:"";
+  position:absolute;
+  left:-38px;
+  top:6px;
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 6px rgba(184,153,90,.2)
+}
+
+.tl-date{
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold)
+}
+
+.tl-item h3{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  font-weight:600;
+  color:var(--ink);
+  margin:6px 0 8px;
+  line-height:1.3
+}
+
 .tl-item p{font-size:.97rem}
 
-/* stats */
-.stats{background:var(--white);padding:84px 0}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);text-align:center}
-.stat{padding:10px 20px;border-right:1px solid var(--line)}
+.tl-item .tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px
+}
+
+.tl-item .tag{
+  font-size:10px;
+  padding:6px 10px;
+  background:#eee8dc;
+  border-radius:999px;
+  color:#746342
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats{
+  background:var(--white);
+  padding:84px 0
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  text-align:center
+}
+
+.stat{
+  padding:10px 20px;
+  border-right:1px solid var(--line)
+}
+
 .stat:last-child{border:0}
-.stat b{display:block;font-family:var(--serif);font-size:clamp(2.6rem,5vw,4rem);font-weight:600;color:var(--gold);line-height:1.1}
-.stat span{display:block;margin-top:8px;font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
 
-/* certificates */
-.works{background:var(--ink);color:#fff;position:relative;overflow:hidden}
-.works::before{content:"";position:absolute;width:600px;height:600px;border-radius:50%;right:-200px;top:-200px;background:radial-gradient(circle,rgba(184,153,90,.14),transparent 65%)}
+.stat b{
+  display:block;
+  font-family:var(--serif);
+  font-size:clamp(2.6rem,5vw,4rem);
+  font-weight:600;
+  color:var(--gold);
+  line-height:1.1
+}
+
+.stat span{
+  display:block;
+  margin-top:8px;
+  font-size:.74rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--muted)
+}
+
+/* =========================================
+   CERTIFICATES & PROJECTS
+========================================= */
+
+.works{
+  background:var(--ink);
+  color:#fff;
+  position:relative;
+  overflow:hidden
+}
+
+.works::before{
+  content:"";
+  position:absolute;
+  width:600px;
+  height:600px;
+  border-radius:50%;
+  right:-200px;
+  top:-200px;
+  background:radial-gradient(circle,rgba(184,153,90,.14),transparent 65%)
+}
+
 .works .kicker{color:var(--gold-2)}
-.work-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:26px;position:relative}
-.work{grid-column:span 2;background:var(--ink-2);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;transition:transform .45s var(--ease),border-color .45s,box-shadow .45s}
-.work:nth-child(4),.work:nth-child(5){grid-column:span 3}
-.work:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 26px 60px rgba(0,0,0,.4)}
-.work .q{font-family:var(--serif);font-size:3rem;line-height:.6;color:var(--gold);height:26px}
-.work blockquote{font-family:var(--serif);font-style:italic;font-size:1.12rem;line-height:1.75;color:#e7e4dc;flex:1;margin:10px 0 28px}
-.work footer{display:flex;align-items:center;gap:16px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1)}
-.work footer img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);padding:2px}
-.work footer h4{font-family:var(--sans);font-size:.92rem;font-weight:600;color:var(--gold-2);letter-spacing:.02em}
-.work footer span{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#a7a39a}
 
-/* cta */
-.cta{background:linear-gradient(120deg,var(--ink-2),var(--ink));color:#fff;padding:84px 0;border-top:1px solid rgba(255,255,255,.08)}
-.cta .container{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:26px;
+  position:relative
+}
+
+.work{
+  grid-column:span 2;
+  background:var(--ink-2);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  padding:36px 32px;
+  display:flex;
+  flex-direction:column;
+  transition:transform .45s var(--ease),border-color .45s,box-shadow .45s
+}
+
+.work:nth-child(4),
+.work:nth-child(5){grid-column:span 3}
+
+.work:hover{
+  transform:translateY(-8px);
+  border-color:var(--gold);
+  box-shadow:0 26px 60px rgba(0,0,0,.4)
+}
+
+.work .q{
+  font-family:var(--serif);
+  font-size:3rem;
+  line-height:.6;
+  color:var(--gold);
+  height:26px
+}
+
+.work blockquote{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.12rem;
+  line-height:1.75;
+  color:#e7e4dc;
+  flex:1;
+  margin:10px 0 28px
+}
+
+.work footer{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding-top:22px;
+  border-top:1px solid rgba(255,255,255,.1)
+}
+
+.work footer img{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid var(--gold);
+  padding:2px
+}
+
+.work footer h4{
+  font-family:var(--sans);
+  font-size:.92rem;
+  font-weight:600;
+  color:var(--gold-2);
+  letter-spacing:.02em
+}
+
+.work footer span{
+  font-size:.7rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#a7a39a
+}
+
+/* =========================================
+   CTA
+========================================= */
+
+.cta{
+  background:linear-gradient(120deg,var(--ink-2),var(--ink));
+  color:#fff;
+  padding:84px 0;
+  border-top:1px solid rgba(255,255,255,.08)
+}
+
+.cta .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  flex-wrap:wrap
+}
+
 .cta h2{margin:0;color:#fff;font-weight:500}
 .cta h2::after{display:none}
 
-/* contact */
+/* =========================================
+   CONTACT
+========================================= */
+
 .contact{background:var(--white)}
-.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:80px
+}
+
 .contact-info p.intro{margin:22px 0 34px}
-.info-item{display:flex;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
-.info-item small{display:block;font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
-.info-item a{transition:color .25s}.info-item a:hover{color:var(--gold)}
-form .row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+.info-item{
+  display:flex;
+  gap:18px;
+  padding:18px 0;
+  border-top:1px solid var(--line)
+}
+
+.info-item small{
+  display:block;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:2px
+}
+
+.info-item a{transition:color .25s}
+.info-item a:hover{color:var(--gold)}
+
+form .row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px
+}
+
 form .field{margin-bottom:20px}
-form label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-form input,form textarea{width:100%;font:inherit;font-size:.98rem;color:var(--ink);background:var(--paper);border:1px solid transparent;border-radius:10px;padding:15px 18px;transition:border-color .3s,background .3s,box-shadow .3s}
-form input:focus,form textarea:focus{outline:0;background:#fff;border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,153,90,.15)}
+
+form label{
+  display:block;
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px
+}
+
+form input,
+form textarea{
+  width:100%;
+  font:inherit;
+  font-size:.98rem;
+  color:var(--ink);
+  background:var(--paper);
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:15px 18px;
+  transition:border-color .3s,background .3s,box-shadow .3s
+}
+
+form input:focus,
+form textarea:focus{
+  outline:0;
+  background:#fff;
+  border-color:var(--gold);
+  box-shadow:0 0 0 4px rgba(184,153,90,.15)
+}
+
 form textarea{min-height:170px;resize:vertical}
-.form-note{font-size:.82rem;color:var(--muted);margin-top:14px}
 
-/* brands */
-.brands{background:var(--paper);padding:56px 0;border-top:1px solid var(--line)}
-.brands .container{display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap}
-.brands img{max-height:56px;width:auto;opacity:.75;transition:opacity .3s,transform .3s}
-.brands img:hover{opacity:1;transform:translateY(-3px)}
+.form-note{
+  font-size:.82rem;
+  color:var(--muted);
+  margin-top:14px
+}
 
-/* footer */
-footer.site{background:var(--ink);color:#aaa69c;padding:72px 0 0;font-size:.92rem}
-.foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:48px;padding-bottom:52px}
-.foot-grid img{height:34px;width:auto;margin-bottom:18px}
-.foot-grid h5{font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#fff;margin-bottom:18px}
+/* =========================================
+   BRANDS
+========================================= */
+
+.brands{
+  background:var(--paper);
+  padding:56px 0;
+  border-top:1px solid var(--line)
+}
+
+.brands .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+  flex-wrap:wrap
+}
+
+.brands img{
+  max-height:56px;
+  width:auto;
+  opacity:.75;
+  transition:opacity .3s,transform .3s
+}
+
+.brands img:hover{
+  opacity:1;
+  transform:translateY(-3px)
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer.site{
+  background:var(--ink);
+  color:#aaa69c;
+  padding:72px 0 0;
+  font-size:.92rem
+}
+
+.foot-grid{
+  display:grid;
+  grid-template-columns:1.2fr 1fr 1fr;
+  gap:48px;
+  padding-bottom:52px
+}
+
+.foot-grid img{
+  height:34px;
+  width:auto;
+  margin-bottom:18px
+}
+
+.foot-grid h5{
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:#fff;
+  margin-bottom:18px
+}
+
 .foot-grid li{margin-bottom:10px}
 .foot-grid a:hover{color:var(--gold-2)}
-.copy{border-top:1px solid rgba(255,255,255,.08);text-align:center;padding:24px 0;font-size:.78rem;letter-spacing:.1em}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.copy{
+  border-top:1px solid rgba(255,255,255,.08);
+  text-align:center;
+  padding:24px 0;
+  font-size:.78rem;
+  letter-spacing:.1em
+}
+
+/* =========================================
+   SCROLL / REVEAL
+========================================= */
+
+.rv{
+  opacity:0;
+  transform:translateY(32px);
+  transition:opacity .9s var(--ease),transform .9s var(--ease)
+}
+
 .rv.in{opacity:1;transform:none}
 .no-js .rv{opacity:1;transform:none}
 
-/* top button */
-#top{position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--ink);border:0;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s;z-index:90;box-shadow:0 10px 26px rgba(184,153,90,.4)}
-#top.show{opacity:1;pointer-events:auto;transform:none}
+/* TOP BUTTON */
 
-/* responsive */
+#top{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--gold);
+  color:var(--ink);
+  border:0;
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:.3s;
+  z-index:90;
+  box-shadow:0 10px 26px rgba(184,153,90,.4)
+}
+
+#top.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:none
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
 @media(max-width:980px){
+
   section{padding:84px 0}
-  .about-grid,.exp-grid,.contact-grid{grid-template-columns:1fr;gap:44px}
+
+  .about-grid,.exp-grid,.contact-grid{
+    grid-template-columns:1fr;
+    gap:44px
+  }
+
   .cards{grid-template-columns:1fr 1fr}
-  .work,.work:nth-child(4),.work:nth-child(5){grid-column:span 6}
-  .stats-grid{grid-template-columns:1fr 1fr;row-gap:34px}
+
+  .work,
+  .work:nth-child(4),
+  .work:nth-child(5){grid-column:span 6}
+
+  .stats-grid{
+    grid-template-columns:1fr 1fr;
+    row-gap:34px
+  }
+
   .stat:nth-child(2){border:0}
-  .portrait{position:relative;top:0;max-width:440px;margin-inline:auto}
+
+  .portrait{
+    position:relative;
+    top:0;
+    max-width:440px;
+    margin-inline:auto
+  }
+
   .foot-grid{grid-template-columns:1fr 1fr}
   .foot-grid>div:first-child{grid-column:1/-1}
+
   .burger{display:block}
-  .nav ul{position:absolute;top:76px;left:0;right:0;background:var(--ink);flex-direction:column;gap:0;padding:8px 24px 20px;display:none;border-top:1px solid rgba(255,255,255,.08)}
+
+  .nav ul{
+    position:absolute;
+    top:78px;
+    left:0;
+    right:0;
+    background:var(--ink);
+    flex-direction:column;
+    gap:0;
+    padding:8px 24px 20px;
+    display:none;
+    border-top:1px solid rgba(255,255,255,.08)
+  }
+
   .nav ul.open{display:flex}
-  .nav ul a{color:#fff;display:block;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+
+  .nav ul a{
+    color:#fff;
+    display:block;
+    padding:14px 0;
+    border-bottom:1px solid rgba(255,255,255,.08)
+  }
 }
+
 @media(max-width:620px){
+
   .container{width:calc(100% - 36px)}
-  .topbar .container{justify-content:center;text-align:center}
-  .topbar span+span,.topbar a+a{margin-left:0}
+
+  .hero .container{padding:130px 0 130px}
+
   .cards{grid-template-columns:1fr}
   form .row{grid-template-columns:1fr}
-  .hero .container{padding:90px 0 130px}
   .foot-grid{grid-template-columns:1fr}
-  .cta .container,.brands .container{justify-content:center;text-align:center}
+
+  .cta .container,
+  .brands .container{
+    justify-content:center;
+    text-align:center
+  }
+
+  .work,
+  .work:nth-child(4),
+  .work:nth-child(5){grid-column:span 6}
 }
+
 @media(prefers-reduced-motion:reduce){
+
   html{scroll-behavior:auto}
-  .rv{opacity:1;transform:none;transition:none}
+
+  .rv{
+    opacity:1;
+    transform:none;
+    transition:none
+  }
+
   .marquee-track,.scroll-cue i{animation:none}
 }
 </style>
 </head>
+
 <body class="no-js">
+
 <div id="progress"></div>
 
-<div class="topbar">
-  <div class="container">
-    <div><span>La Chorrera, Panama</span></div>
-    <div>
-      <a href="https://www.linkedin.com/in/ahyram-mart%C3%ADnez-n%C3%BA%C3%B1ez-3a193b40a/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="mailto:riemann22am@gmail.com">riemann22am@gmail.com</a>
-    </div>
-  </div>
-</div>
+<!-- =========================================
+     HEADER — SAME AS ABOUT-ME PAGE
+========================================= -->
 
 <header class="nav" id="nav">
   <div class="container">
-    <a class="logo" href="#home" aria-label="Ahyram Martínez"><img src="wp-content/themes/atelier/assets/images/logo.webp" alt="Ahyram Martínez"></a>
-    <nav aria-label="Main">
+
+    <a class="logo" href="index.html" aria-label="Ahyram Martínez">
+      <img
+        src="wp-content/themes/atelier/assets/images/logo.webp"
+        alt="Ahyram Martínez">
+    </a>
+
+    <nav aria-label="Main navigation">
       <ul id="menu">
         <li><a href="#home" class="active">Home</a></li>
-        <li><a href="aboutmereal.html">About</a></li>
+        <li><a href="aboutmereal.html">About Me</a></li>
         <li><a href="#expertise">Expertise</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+
+    <button
+      class="burger"
+      id="burger"
+      aria-label="Toggle menu"
+      aria-expanded="false">
+      <span></span>
+    </button>
+
   </div>
 </header>
 
 <main id="home">
+
   <!-- HERO -->
+
   <section class="hero" style="padding:0">
     <div class="hero-bg" id="heroBg"></div>
+
     <div class="container">
       <span class="eyebrow">Science · Technology · Engineering</span>
-      <h1>Greetings! I'm <em>Ahyram Martínez</em></h1>
-      <p>Aspiring engineer with a strong foundation in science, mathematics, and technology. Experienced in academic projects, Python programming, and data analysis, with a passion for problem-solving and continuous learning. Always looking for opportunities to grow, collaborate, and create meaningful solutions.</p>
+
+      <h1>
+        Greetings! I'm
+        <em>Ahyram Martínez</em>
+      </h1>
+
+      <p>
+        Aspiring engineer with a strong foundation in science,
+        mathematics, and technology. Experienced in academic projects,
+        Python programming, and data analysis, with a passion for
+        problem-solving and continuous learning. Always looking for
+        opportunities to grow, collaborate, and create meaningful solutions.
+      </p>
+
       <div class="hero-cta">
         <a class="btn btn-gold" href="#contact">Let's connect</a>
         <a class="btn btn-ghost" href="#projects">View projects</a>
       </div>
     </div>
-    <a class="scroll-cue" href="#about"><span>Scroll Down</span><i></i></a>
+
+    <a class="scroll-cue" href="#about">
+      <span>Scroll Down</span>
+      <i></i>
+    </a>
   </section>
 
+
   <!-- ABOUT -->
+
   <section class="about" id="about">
     <div class="container">
+
       <div class="sec-head rv">
         <span class="kicker">Introduction</span>
         <h2>Something About <span>Me</span></h2>
       </div>
+
       <div class="about-grid">
+
         <div class="rv">
           <p class="lead">Curiosity is what drives me.</p>
-          <p>I'm passionate about science and technology, with an endless curiosity for discovering how things work. I enjoy challenging myself, exploring complex ideas, and turning knowledge into practical applications.</p>
+          <p>
+            I'm passionate about science and technology, with an endless
+            curiosity for discovering how things work. I enjoy challenging
+            myself, exploring complex ideas, and turning knowledge into
+            practical applications.
+          </p>
         </div>
+
         <div class="rv">
           <h4>My Story</h4>
-          <p>Academic Background: I'm a science student from La Chorrera, Panama, completing my education at Colegio Ingeniero Tomás Guardia while participating in ¡Supérate! Fundación Alberto Motta. My academic journey has strengthened my foundations in science, mathematics, English, and technology.</p>
+          <p>
+            Academic Background: I'm a science student from La Chorrera,
+            Panama, completing my education at Colegio Ingeniero Tomás
+            Guardia while participating in ¡Supérate! Fundación Alberto
+            Motta. My academic journey has strengthened my foundations
+            in science, mathematics, English, and technology.
+          </p>
         </div>
+
         <div class="rv">
           <h4>My Skills</h4>
           <ul class="skills">
@@ -302,24 +1263,37 @@ footer.site{background:var(--ink);color:#aaa69c;padding:72px 0 0;font-size:.92re
             <li>Analytical thinking. Scientific problem-solving</li>
           </ul>
         </div>
+
       </div>
     </div>
   </section>
 
+
   <!-- MARQUEE -->
+
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>AHYRAM MARTÍNEZ</span><span>AHYRAM MARTÍNEZ</span><span>AHYRAM MARTÍNEZ</span><span>AHYRAM MARTÍNEZ</span>
+      <span>AHYRAM MARTÍNEZ</span>
+      <span>AHYRAM MARTÍNEZ</span>
+      <span>AHYRAM MARTÍNEZ</span>
+      <span>AHYRAM MARTÍNEZ</span>
     </div>
   </div>
 
+
   <!-- VIDEO + EXPERTISE -->
+
   <section class="showcase dark" id="expertise">
     <div class="container">
+
       <div class="video-wrap rv">
-        <video controls preload="metadata" poster="ld-wp.template-help.com\wordpress_64776\2017\imagenes\focuseado.png" width="770" height="433">
-          <source type="video/mp4" src="wp-content/uploads/2017/09/Design.mp4230a.html?_=1">
-        </video>
+        <iframe
+          src="https://streamable.com/o/pu3fmb"
+          title="Ahyram Martínez - Portfolio Presentation"
+          frameborder="0"
+          scrolling="no"
+          allowfullscreen>
+        </iframe>
       </div>
 
       <div class="sec-head rv">
@@ -328,193 +1302,423 @@ footer.site{background:var(--ink);color:#aaa69c;padding:72px 0 0;font-size:.92re
       </div>
 
       <div class="cards">
+
         <article class="card rv">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/><path d="M8 15h8"/></svg></div>
+          <div class="ico">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>
+              <path d="M8 15h8"/>
+            </svg>
+          </div>
           <h3>Scientific Documentation</h3>
-          <p>I document experiments and projects, paying attention to details and the evidence behind every result.</p>
+          <p>
+            I document experiments and projects, paying attention to
+            details and the evidence behind every result.
+          </p>
         </article>
+
         <article class="card rv">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></div>
+          <div class="ico">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 18h6M10 21h4"/>
+              <path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>
+            </svg>
+          </div>
           <h3>Critical Thinking</h3>
-          <p>I analyze information and situations from multiple perspectives to make informed decisions and solve problems.</p>
+          <p>
+            I analyze information and situations from multiple perspectives
+            to make informed decisions and solve problems.
+          </p>
         </article>
+
         <article class="card rv">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/><path d="M4 21a2 2 0 0 1 2-2h12"/></svg></div>
+          <div class="ico">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2z"/>
+              <path d="M4 21a2 2 0 0 1 2-2h12"/>
+            </svg>
+          </div>
           <h3>Research &amp; Learning</h3>
-          <p>I study mathematics and physics on my own, from calculus to electromagnetism, because I want to understand the principles behind the results, not just memorize formulas.</p>
+          <p>
+            I study mathematics and physics on my own, from calculus
+            to electromagnetism, because I want to understand the principles
+            behind the results, not just memorize formulas.
+          </p>
         </article>
+
         <article class="card rv">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div>
+          <div class="ico">
+            <svg viewBox="0 0 24 24">
+              <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/>
+            </svg>
+          </div>
           <h3>Programming &amp; Technology</h3>
-          <p>I use Python and digital tools to explore ideas, develop technical skills, and approach problems through technology.</p>
+          <p>
+            I use Python and digital tools to explore ideas, develop
+            technical skills, and approach problems through technology.
+          </p>
         </article>
+
         <article class="card rv">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg></div>
+          <div class="ico">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2l9 5v10l-9 5-9-5V7z"/>
+              <path d="M12 12l9-5M12 12v10M12 12L3 7"/>
+            </svg>
+          </div>
           <h3>Project Development</h3>
-          <p>I build prototypes, work with electronic components, document experiments, and analyze results, learning to plan, test, adapt, and learn from mistakes.</p>
+          <p>
+            I build prototypes, work with electronic components, document
+            experiments, and analyze results, learning to plan, test,
+            adapt, and learn from mistakes.
+          </p>
         </article>
+
         <article class="card rv">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-7"/></svg></div>
+          <div class="ico">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 3v18h18"/>
+              <path d="M7 15l4-4 3 3 6-7"/>
+            </svg>
+          </div>
           <h3>Data Analysis</h3>
-          <p>Excel Expert certified, with skills in organizing, processing, and interpreting data to generate meaningful insights.</p>
+          <p>
+            Excel Expert certified, with skills in organizing, processing,
+            and interpreting data to generate meaningful insights.
+          </p>
         </article>
+
       </div>
     </div>
   </section>
 
+
   <!-- EXPERIENCE -->
+
   <section class="experience" id="experience">
     <div class="container exp-grid">
+
       <div class="portrait rv">
-        <img src="wp-content/uploads/2017/06/skin4-image-4.jpg" width="486" height="636" alt="" srcset="wp-content/uploads/2017/06/skin4-image-4.jpg 486w, wp-content/uploads/2017/06/skin4-image-4-229x300.jpg 229w, wp-content/uploads/2017/06/skin4-image-4-418x547.jpg 418w" sizes="(max-width: 980px) 90vw, 486px">
+        <img
+          src="wp-content/uploads/2017/06/meblack.png"
+          width="486"
+          height="636"
+          alt="Ahyram Martínez"
+          loading="lazy">
       </div>
+
       <div class="exp-text left">
+
         <span class="kicker rv">Presentation</span>
         <h2 class="rv">My Experience</h2>
-        <p class="rv">My journey combines academic development, professional exposure, and a constant desire to learn. Throughout my education, I have explored science, technology, and business while developing the skills and discipline to pursue my professional goals.</p>
+
+        <p class="rv">
+          My journey combines academic development, professional exposure,
+          and a constant desire to learn. Throughout my education, I have
+          explored science, technology, and business while developing
+          the skills and discipline to pursue my professional goals.
+        </p>
 
         <div class="timeline">
+
           <div class="tl-item rv">
             <div class="tl-date">Mar 2024 – Dec 2026</div>
-            <h3>Science Student at Colegio Ingeniero Tomás Guardia (2024–2026)</h3>
-            <p>Completing a High School Diploma in Science, building a foundation in mathematics, physics, chemistry, and scientific reasoning. My interests go beyond the curriculum, toward calculus, advanced mathematics, physics, and engineering.</p>
+            <h3>Science Student at Colegio Ingeniero Tomás Guardia</h3>
+            <p>
+              Completing a High School Diploma in Science, building a
+              foundation in mathematics, physics, chemistry, and scientific
+              reasoning. My interests go beyond the curriculum, toward
+              calculus, advanced mathematics, physics, and engineering.
+            </p>
           </div>
+
           <div class="tl-item rv">
             <div class="tl-date">Jan 2024 – Dec 2026</div>
-            <h3>Student at ¡Supérate! Fundación Alberto Motta (2024–2026)</h3>
-            <p>A complementary program in English, technology, and values: language proficiency and communication, digital skills with Microsoft Excel and Python, and leadership, teamwork, responsibility, and resilience.</p>
+            <h3>Student at ¡Supérate! Fundación Alberto Motta</h3>
+            <p>
+              A complementary program in English, technology, and values:
+              language proficiency and communication, digital skills with
+              Microsoft Excel and Python, and leadership, teamwork,
+              responsibility, and resilience.
+            </p>
           </div>
+
           <div class="tl-item rv">
             <div class="tl-date">Dec 2025 – Jan 2026</div>
-            <h3>Customer Service Intern at ASSA Compañía de Seguros (Dec 2025 – Jan 2026)</h3>
-            <p>Two-month, in-person internship under a training agreement. My first exposure to a corporate environment, with a closer look at customer service operations, professional communication, and responsibility within an organization.</p>
+            <h3>Customer Service Intern at ASSA Compañía de Seguros</h3>
+            <p>
+              Two-month, in-person internship under a training agreement.
+              My first exposure to a corporate environment, with a closer
+              look at customer service operations, professional communication,
+              and responsibility within an organization.
+            </p>
           </div>
+
         </div>
       </div>
     </div>
   </section>
 
+
   <!-- STATS -->
+
   <section class="stats">
     <div class="container stats-grid">
-      <div class="stat rv"><b data-count="4">0</b><span>certifications</span></div>
-      <div class="stat rv"><b data-count="2">0</b><span>projects developed</span></div>
-      <div class="stat rv"><b data-count="875">0</b><span>TOEIC score</span></div>
-      <div class="stat rv"><b data-count="2">0</b><span>months of internship</span></div>
+
+      <div class="stat rv">
+        <b data-count="4">0</b>
+        <span>certifications</span>
+      </div>
+
+      <div class="stat rv">
+        <b data-count="2">0</b>
+        <span>projects developed</span>
+      </div>
+
+      <div class="stat rv">
+        <b data-count="875">0</b>
+        <span>TOEIC score</span>
+      </div>
+
+      <div class="stat rv">
+        <b data-count="2">0</b>
+        <span>months of internship</span>
+      </div>
+
     </div>
   </section>
 
+
   <!-- CERTIFICATES & PROJECTS -->
+
   <section class="works dark" id="projects">
     <div class="container">
+
       <div class="sec-head rv">
         <span class="kicker">Selected work</span>
         <h2>Certificates &amp; Projects</h2>
       </div>
+
       <div class="work-grid">
+
         <article class="work rv">
           <div class="q">“</div>
-          <blockquote>Developed a small-scale wind energy generation prototype, exploring electrical generation, energy storage, and voltage conversion.</blockquote>
+          <blockquote>
+            Developed a small-scale wind energy generation prototype,
+            exploring electrical generation, energy storage, and
+            voltage conversion.
+          </blockquote>
           <footer>
-            <img src="wp-content/uploads/2017/06/testi-2-150x150.jpg" alt="">
-            <div><h4>Wind Energy Generation</h4><span>Engineering Project</span></div>
+            <img src="wp-content/uploads/2017/06/testi-2-150x150.jpg" alt="Wind energy project" loading="lazy">
+            <div>
+              <h4>Wind Energy Generation</h4>
+              <span>Engineering Project</span>
+            </div>
           </footer>
         </article>
+
         <article class="work rv">
           <div class="q">“</div>
-          <blockquote>Designed an educational board game simulating career paths, financial decisions, education, and different aspects of adult life.</blockquote>
+          <blockquote>
+            Certified in Microsoft Excel Specialist, demonstrating
+            proficiency in spreadsheet management and data analysis.
+          </blockquote>
           <footer>
-            <img src="wp-content/uploads/2017/06/wapuula-3-150x150.jpg" alt="">
-            <div><h4>Struggle — Board Game</h4><span>Academic Project</span></div>
+            <img src="wp-content/uploads/2017/06/wapuula-3-150x150.jpg" alt="Excel Specialist certificate" loading="lazy">
+            <div>
+              <h4>Microsoft Excel Specialist</h4>
+              <span>Certification</span>
+            </div>
           </footer>
         </article>
+
         <article class="work rv">
           <div class="q">“</div>
-          <blockquote>Achieved a TOEIC score of 875, demonstrating English language proficiency in a standardized assessment.</blockquote>
+          <blockquote>
+            Achieved a TOEIC score of 875, demonstrating English language
+            proficiency in a standardized assessment.
+          </blockquote>
           <footer>
-            <img src="wp-content/uploads/2017/06/wapuula-5-150x150.jpg" alt="">
-            <div><h4>TOEIC — 875</h4><span>Certification</span></div>
+            <img src="wp-content/uploads/2017/06/wapuula-5-150x150.jpg" alt="TOEIC certification" loading="lazy">
+            <div>
+              <h4>TOEIC — 875</h4>
+              <span>Certification</span>
+            </div>
           </footer>
         </article>
+
         <article class="work rv">
           <div class="q">“</div>
-          <blockquote>Certified in advanced spreadsheet skills, data management, and productivity tools using Microsoft Excel.</blockquote>
+          <blockquote>
+            Certified in advanced spreadsheet skills, data management,
+            and productivity tools using Microsoft Excel.
+          </blockquote>
           <footer>
-            <img src="wp-content/uploads/2017/06/testi-2-150x150.jpg" alt="">
-            <div><h4>Microsoft Excel Expert</h4><span>Certification</span></div>
+            <img src="wp-content/uploads/2017/06/testi-2-150x150.jpg" alt="Excel Expert certificate" loading="lazy">
+            <div>
+              <h4>Microsoft Excel Expert</h4>
+              <span>Certification</span>
+            </div>
           </footer>
         </article>
+
         <article class="work rv">
           <div class="q">“</div>
-          <blockquote>Developed foundational programming knowledge through Python, including fundamental concepts and logical thinking.</blockquote>
+          <blockquote>
+            Developed foundational programming knowledge through Python,
+            including fundamental concepts and logical thinking.
+          </blockquote>
           <footer>
-            <img src="wp-content/uploads/2017/06/wapuula-3-150x150.jpg" alt="">
-            <div><h4>Python Essentials 1</h4><span>Technical Training</span></div>
+            <img src="wp-content/uploads/2017/06/wapuula-3-150x150.jpg" alt="Python Essentials certificate" loading="lazy">
+            <div>
+              <h4>Python Essentials 1</h4>
+              <span>Technical Training</span>
+            </div>
           </footer>
         </article>
+
       </div>
     </div>
   </section>
 
+
   <!-- CTA -->
+
   <section class="cta">
     <div class="container">
       <h2>Have an opportunity in mind?</h2>
-      <a class="btn btn-gold" href="mailto:riemann22am@gmail.com">Let's connect →</a>
+      <a class="btn btn-gold" href="mailto:riemann22am@gmail.com">
+        Let's connect →
+      </a>
     </div>
   </section>
 
+
   <!-- CONTACT -->
+
   <section class="contact" id="contact">
     <div class="container contact-grid">
-      <div class="contact-info left">
-        <span class="kicker" style="font-size:.72rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)">Get in touch</span>
+
+      <div class="contact-info">
+
+        <span class="kicker" style="font-size:.72rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)">
+          Get in touch
+        </span>
+
         <h2>Contact Me</h2>
-        <p class="intro">Have a question, an interesting opportunity, or an idea for collaboration? I'd be glad to hear from you. I'm always open to connecting with people and exploring opportunities in science, technology, and engineering.</p>
-        <div class="info-item"><div><small>Location</small>La Chorrera, Panama</div></div>
-        <div class="info-item"><div><small>LinkedIn</small><a href="https://www.linkedin.com/in/ahyram-mart%C3%ADnez-n%C3%BA%C3%B1ez-3a193b40a/" target="_blank" rel="noopener noreferrer">Connect with me on LinkedIn →</a></div></div>
-        <div class="info-item"><div><small>E-mail</small><a href="mailto:riemann22am@gmail.com">riemann22am@gmail.com</a></div></div>
+
+        <p class="intro">
+          Have a question, an interesting opportunity, or an idea for
+          collaboration? I'd be glad to hear from you. I'm always open
+          to connecting with people and exploring opportunities in
+          science, technology, and engineering.
+        </p>
+
+        <div class="info-item">
+          <div>
+            <small>Location</small>
+            La Chorrera, Panama
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div>
+            <small>LinkedIn</small>
+            <a href="https://www.linkedin.com/in/ahyram-mart%C3%ADnez-n%C3%BA%C3%B1ez-3a193b40a/" target="_blank" rel="noopener noreferrer">
+              Connect with me on LinkedIn →
+            </a>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div>
+            <small>E-mail</small>
+            <a href="mailto:riemann22am@gmail.com">riemann22am@gmail.com</a>
+          </div>
+        </div>
+
       </div>
 
       <div>
-        <h2 class="left" style="font-size:clamp(1.6rem,2.6vw,2.2rem)">Send a Message</h2>
+        <h2 class="left" style="font-size:clamp(1.6rem,2.6vw,2.2rem)">
+          Send a Message
+        </h2>
+
         <form id="contactForm" style="margin-top:34px" novalidate>
+
           <div class="row">
-            <div class="field"><label for="n">Name</label><input id="n" name="name" type="text" placeholder="Enter your name" required></div>
-            <div class="field"><label for="e">E-mail</label><input id="e" name="email" type="email" placeholder="Enter your e-mail" required></div>
+            <div class="field">
+              <label for="n">Name</label>
+              <input id="n" name="name" type="text" placeholder="Enter your name" required>
+            </div>
+
+            <div class="field">
+              <label for="e">E-mail</label>
+              <input id="e" name="email" type="email" placeholder="Enter your e-mail" required>
+            </div>
           </div>
+
           <div class="row">
-            <div class="field"><label for="p">Phone</label><input id="p" name="phone" type="text" placeholder="Enter your phone"></div>
-            <div class="field"><label for="c">Company</label><input id="c" name="company" type="text" placeholder="Enter your company"></div>
+            <div class="field">
+              <label for="p">Phone</label>
+              <input id="p" name="phone" type="text" placeholder="Enter your phone">
+            </div>
+
+            <div class="field">
+              <label for="c">Company</label>
+              <input id="c" name="company" type="text" placeholder="Enter your company">
+            </div>
           </div>
-          <div class="field"><label for="m">Message</label><textarea id="m" name="message" placeholder="Write message" required></textarea></div>
+
+          <div class="field">
+            <label for="m">Message</label>
+            <textarea id="m" name="message" placeholder="Write message" required></textarea>
+          </div>
+
           <button class="btn btn-gold" type="submit">Send Message</button>
-          <p class="form-note" id="formNote">Your email app will open with the message ready to send.</p>
+
+          <p class="form-note" id="formNote">
+            Your email app will open with the message ready to send.
+          </p>
+
         </form>
       </div>
     </div>
   </section>
 
+
   <!-- BRANDS -->
+
   <div class="brands">
     <div class="container">
-      <img src="wp-content/uploads/2017/06/brand-1.webp" width="170" height="61" alt="">
-      <img src="wp-content/uploads/2017/06/brand-2.webp" width="98" height="101" alt="">
-      <img src="wp-content/uploads/2017/06/brand-4.webp" width="100" height="92" alt="">
-      <img src="wp-content/uploads/2017/06/brand-5.webp" width="187" height="63" alt="">
-      <img src="wp-content/uploads/2017/06/brand-6.webp" width="104" height="81" alt="">
-      <img src="wp-content/uploads/2017/06/brand-3.webp" width="209" height="49" alt="">
+
+      <img src="wp-content/uploads/2017/06/brand-1.webp" width="170" height="61" alt="Brand logo" loading="lazy">
+      <img src="wp-content/uploads/2017/06/brand-2.webp" width="98" height="101" alt="Brand logo" loading="lazy">
+      <img src="wp-content/uploads/2017/06/brand-4.webp" width="100" height="92" alt="Brand logo" loading="lazy">
+      <img src="wp-content/uploads/2017/06/brand-5.webp" width="187" height="63" alt="Brand logo" loading="lazy">
+      <img src="wp-content/uploads/2017/06/brand-6.webp" width="104" height="81" alt="Brand logo" loading="lazy">
+      <img src="wp-content/uploads/2017/06/brand-3.webp" width="209" height="49" alt="Brand logo" loading="lazy">
+
     </div>
   </div>
+
 </main>
+
+
+<!-- FOOTER -->
 
 <footer class="site">
   <div class="container">
+
     <div class="foot-grid">
+
       <div>
         <img src="wp-content/themes/atelier/assets/images/footer-logo.webp" alt="Ahyram Martínez">
-        <p>Aspiring engineer focused on science, mathematics, and technology.</p>
+        <p>
+          Aspiring engineer focused on science, mathematics, and technology.
+        </p>
       </div>
+
       <div>
         <h5>Navigate</h5>
         <ul>
@@ -524,86 +1728,311 @@ footer.site{background:var(--ink);color:#aaa69c;padding:72px 0 0;font-size:.92re
           <li><a href="#projects">Projects</a></li>
         </ul>
       </div>
+
       <div>
         <h5>Contact</h5>
         <ul>
           <li>La Chorrera, Panama</li>
-          <li><a href="https://www.linkedin.com/in/ahyram-mart%C3%ADnez-n%C3%BA%C3%B1ez-3a193b40a/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li>
+            <a href="https://www.linkedin.com/in/ahyram-mart%C3%ADnez-n%C3%BA%C3%B1ez-3a193b40a/" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+          </li>
           <li><a href="mailto:riemann22am@gmail.com">riemann22am@gmail.com</a></li>
         </ul>
       </div>
+
     </div>
   </div>
-  <div class="copy">Copyright © 2026 All Rights Reserved by Ahyram Martínez</div>
+
+  <div class="copy">
+    Copyright © <span id="yr">2026</span> All Rights Reserved by Ahyram Martínez
+  </div>
 </footer>
+
 
 <button id="top" aria-label="Back to top">↑</button>
 
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
 <script>
 (function(){
+
   'use strict';
-  var d=document,b=d.body; b.classList.remove('no-js');
-  var nav=d.getElementById('nav'),bar=d.getElementById('progress'),top=d.getElementById('top'),hero=d.getElementById('heroBg');
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var d = document;
+  var b = d.body;
+
+  b.classList.remove('no-js');
+
+  var nav = d.getElementById('nav');
+  var bar = d.getElementById('progress');
+  var topButton = d.getElementById('top');
+  var hero = d.getElementById('heroBg');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var menu = d.getElementById('menu');
+  var burger = d.getElementById('burger');
+
+  d.getElementById('yr').textContent = new Date().getFullYear();
+
+
+  /* SCROLL EFFECTS */
 
   function onScroll(){
-    var y=window.pageYOffset,h=d.documentElement.scrollHeight-innerHeight;
-    bar.style.width=(h>0?y/h*100:0)+'%';
-    nav.classList.toggle('scrolled',y>60);
-    top.classList.toggle('show',y>700);
-    if(hero&&!reduce&&y<1100) hero.style.transform='translate3d(0,'+(y*.18)+'px,0)';
+
+    var y = window.pageYOffset;
+    var h = d.documentElement.scrollHeight - window.innerHeight;
+
+    bar.style.width = (h > 0 ? y / h * 100 : 0) + '%';
+
+    nav.classList.toggle('scrolled', y > 40);
+
+    topButton.classList.toggle('show', y > 700);
+
+    if(hero && !reduce && y < 1100){
+      hero.style.transform = 'translate3d(0,' + (y * .18) + 'px,0)';
+    }
+
   }
-  addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  top.addEventListener('click',function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
 
-  /* mobile menu */
-  var burger=d.getElementById('burger'),menu=d.getElementById('menu');
-  burger.addEventListener('click',function(){
-    var o=menu.classList.toggle('open'); burger.setAttribute('aria-expanded',o);
+  addEventListener('scroll', onScroll, {passive:true});
+
+  onScroll();
+
+
+  /* BACK TO TOP */
+
+  topButton.addEventListener('click', function(){
+
+    scrollTo({
+      top:0,
+      behavior:reduce ? 'auto' : 'smooth'
+    });
+
   });
-  menu.addEventListener('click',function(e){ if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');} });
 
-  /* active link */
-  var links=[].slice.call(menu.querySelectorAll('a'));
-  var secs=links.map(function(a){return d.querySelector(a.getAttribute('href'))});
+
+  /* MOBILE MENU — SAME AS ABOUT-ME PAGE */
+
+  burger.addEventListener('click', function(){
+
+    var isOpen = menu.classList.toggle('open');
+
+    burger.setAttribute('aria-expanded', String(isOpen));
+
+  });
+
+
+  menu.addEventListener('click', function(e){
+
+    if(e.target.tagName === 'A'){
+
+      menu.classList.remove('open');
+
+      burger.setAttribute('aria-expanded', 'false');
+
+    }
+
+  });
+
+
+  /* ACTIVE NAVIGATION LINKS */
+
+  var sectionLinks = Array.prototype.slice.call(
+    menu.querySelectorAll('a[href^="#"]')
+  );
+
   if('IntersectionObserver' in window){
-    var so=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ var i=secs.indexOf(e.target); links.forEach(function(l,k){l.classList.toggle('active',k===i)}); } });
-    },{rootMargin:'-45% 0px -50% 0px'});
-    secs.forEach(function(s){ if(s) so.observe(s); });
 
-    /* reveal */
-    var io=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-    },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
-    d.querySelectorAll('.rv').forEach(function(el,i){ el.style.transitionDelay=((i%3)*90)+'ms'; io.observe(el); });
+    var sectionTargets = sectionLinks.map(function(a){
 
-    /* counters */
-    var co=new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(!e.isIntersecting) return; co.unobserve(e.target);
-        var el=e.target,end=+el.dataset.count,t0=null,dur=1600;
-        if(reduce){el.textContent=end;return;}
-        (function step(t){ if(!t0)t0=t; var p=Math.min((t-t0)/dur,1),v=1-Math.pow(1-p,3);
-          el.textContent=Math.round(end*v); if(p<1)requestAnimationFrame(step); })(performance.now());
+      return d.querySelector(a.getAttribute('href'));
+
+    }).filter(Boolean);
+
+
+    var activeObserver = new IntersectionObserver(function(entries){
+
+      entries.forEach(function(entry){
+
+        if(entry.isIntersecting){
+
+          sectionLinks.forEach(function(link){
+
+            link.classList.toggle(
+              'active',
+              link.getAttribute('href') === '#' + entry.target.id
+            );
+
+          });
+
+        }
+
       });
-    },{threshold:.6});
-    d.querySelectorAll('[data-count]').forEach(function(el){co.observe(el)});
+
+    }, {
+      rootMargin:'-42% 0px -52% 0px'
+    });
+
+
+    sectionTargets.forEach(function(section){
+
+      activeObserver.observe(section);
+
+    });
+
+
+    /* REVEAL ANIMATIONS */
+
+    var revealObserver = new IntersectionObserver(function(entries){
+
+      entries.forEach(function(entry){
+
+        if(entry.isIntersecting){
+
+          entry.target.classList.add('in');
+
+          revealObserver.unobserve(entry.target);
+
+        }
+
+      });
+
+    }, {
+      threshold:.12,
+      rootMargin:'0px 0px -6% 0px'
+    });
+
+
+    d.querySelectorAll('.rv').forEach(function(el,i){
+
+      el.style.transitionDelay = ((i % 3) * 90) + 'ms';
+
+      revealObserver.observe(el);
+
+    });
+
+
+    /* STAT COUNTERS */
+
+    var counterObserver = new IntersectionObserver(function(entries){
+
+      entries.forEach(function(entry){
+
+        if(!entry.isIntersecting) return;
+
+        counterObserver.unobserve(entry.target);
+
+        var el = entry.target;
+        var end = Number(el.dataset.count);
+        var start = null;
+        var duration = 1600;
+
+        if(reduce){
+          el.textContent = end;
+          return;
+        }
+
+        function step(timestamp){
+
+          if(start === null) start = timestamp;
+
+          var progress = Math.min((timestamp - start) / duration, 1);
+
+          var eased = 1 - Math.pow(1 - progress, 3);
+
+          el.textContent = Math.round(end * eased);
+
+          if(progress < 1){
+            requestAnimationFrame(step);
+          }
+
+        }
+
+        requestAnimationFrame(step);
+
+      });
+
+    }, {
+      threshold:.6
+    });
+
+
+    d.querySelectorAll('[data-count]').forEach(function(el){
+
+      counterObserver.observe(el);
+
+    });
+
   } else {
-    d.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
-    d.querySelectorAll('[data-count]').forEach(function(el){el.textContent=el.dataset.count});
+
+    d.querySelectorAll('.rv').forEach(function(el){
+
+      el.classList.add('in');
+
+    });
+
+    d.querySelectorAll('[data-count]').forEach(function(el){
+
+      el.textContent = el.dataset.count;
+
+    });
+
   }
 
-  /* contact form -> mailto */
-  d.getElementById('contactForm').addEventListener('submit',function(e){
+
+  /* CONTACT FORM — MAILTO */
+
+  d.getElementById('contactForm').addEventListener('submit', function(e){
+
     e.preventDefault();
-    var f=e.target,n=f.name.value.trim(),em=f.email.value.trim(),m=f.message.value.trim(),note=d.getElementById('formNote');
-    if(!n||!em||!m||em.indexOf('@')<1){ note.textContent='Please complete your name, a valid e-mail and a message.'; note.style.color='#b3402f'; return; }
-    var body='Name: '+n+'\nE-mail: '+em+(f.phone.value?'\nPhone: '+f.phone.value:'')+(f.company.value?'\nCompany: '+f.company.value:'')+'\n\n'+m;
-    location.href='mailto:riemann22am@gmail.com?subject='+encodeURIComponent('Portfolio contact — '+n)+'&body='+encodeURIComponent(body);
-    note.textContent='Thank you! Your email app should open now.'; note.style.color='';
+
+    var form = e.target;
+
+    var name = form.name.value.trim();
+    var email = form.email.value.trim();
+    var message = form.message.value.trim();
+
+    var note = d.getElementById('formNote');
+
+
+    if(!name || !email || !message || email.indexOf('@') < 1){
+
+      note.textContent = 'Please complete your name, a valid e-mail and a message.';
+
+      note.style.color = '#b3402f';
+
+      return;
+
+    }
+
+
+    var body =
+      'Name: ' + name +
+      '\nE-mail: ' + email +
+      (form.phone.value ? '\nPhone: ' + form.phone.value : '') +
+      (form.company.value ? '\nCompany: ' + form.company.value : '') +
+      '\n\n' + message;
+
+
+    window.location.href =
+      'mailto:riemann22am@gmail.com?subject=' +
+      encodeURIComponent('Portfolio contact — ' + name) +
+      '&body=' +
+      encodeURIComponent(body);
+
+
+    note.textContent = 'Thank you! Your email app should open now.';
+
+    note.style.color = '';
+
   });
+
 })();
 </script>
+
 </body>
 </html>
