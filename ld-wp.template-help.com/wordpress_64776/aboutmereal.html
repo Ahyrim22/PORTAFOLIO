@@ -80,7 +80,7 @@ h2 span{color:var(--gold)}
 
 /* about */
 .about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center}
-.about-photo{position:relative}
+.about-photo{position:relative;isolation:isolate}
 .about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px;box-shadow:0 30px 70px rgba(15,18,24,.22)}
 .about-photo::before{content:"";position:absolute;inset:22px -22px -22px 22px;border:1px solid var(--gold);border-radius:16px;z-index:-1}
 .about-text h3{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.35;color:var(--ink);margin:14px 0 22px}
@@ -147,10 +147,10 @@ h2 span{color:var(--gold)}
 .cert-thumb.missing img{display:none}
 .cert-thumb.missing::before{content:"";width:46px;height:58px;border:2px solid #cfc8b6;border-radius:6px}
 .cert-thumb.missing::after{content:attr(data-hint);white-space:pre-line;font-size:.74rem;line-height:1.5}
-.cert-info{padding:26px 30px 32px}
+.cert-info{display:block;padding:26px 30px 32px}
 .badge{display:inline-block;font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.cert-info h3{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--ink);margin-bottom:8px}
-.cert-info p{font-size:.93rem;color:var(--muted)}
+.cert-title{display:block;font-family:var(--serif);font-size:1.3rem;font-weight:600;line-height:1.3;color:var(--ink);margin-bottom:8px}
+.cert-desc{display:block;font-size:.93rem;color:var(--muted);line-height:1.75}
 .lightbox{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:30px;background:rgba(8,10,16,.93)}
 .lightbox.open{display:flex}
 .lightbox figure{margin:0;max-width:min(1000px,100%);text-align:center}
@@ -183,9 +183,11 @@ footer.site{background:var(--ink);color:#aaa69c;padding:56px 0 0;font-size:.9rem
 #top{position:fixed;right:24px;bottom:24px;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:var(--ink);border:0;cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.3s;z-index:90;box-shadow:0 10px 26px rgba(184,153,90,.4)}
 #top.show{opacity:1;pointer-events:auto;transform:none}
 
-.rv{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.rv.in{opacity:1;transform:none}
-.no-js .rv{opacity:1;transform:none}
+/* reveal on scroll (animation, so hover effects keep working) */
+.rv{opacity:0}
+.rv.in{opacity:1;animation:rvIn .9s var(--ease) backwards}
+@keyframes rvIn{from{opacity:0;transform:translateY(32px)}}
+.no-js .rv{opacity:1}
 
 @media(max-width:980px){
   section{padding:80px 0}
@@ -210,7 +212,7 @@ footer.site{background:var(--ink);color:#aaa69c;padding:56px 0 0;font-size:.9rem
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .rv{opacity:1;transform:none;transition:none}
+  .rv,.rv.in{opacity:1;animation:none}
 }
 </style>
 </head>
@@ -229,15 +231,15 @@ footer.site{background:var(--ink);color:#aaa69c;padding:56px 0 0;font-size:.9rem
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    <button type="button" class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false" aria-controls="menu"><span></span></button>
   </div>
 </header>
 
-<section class="page-hero" style="padding-bottom:110px">
+<section class="page-hero">
   <div class="container">
     <span class="eyebrow">Science · Technology · Engineering</span>
     <h1>About Me</h1>
-    <p class="crumbs"><a href="index.html">Home</a> &nbsp;/&nbsp; <span>About Me</span></p>
+    <p class="crumbs"><a href="mainindex.html">Home</a> &nbsp;/&nbsp; <span>About Me</span></p>
   </div>
 </section>
 
@@ -451,59 +453,58 @@ footer.site{background:var(--ink);color:#aaa69c;padding:56px 0 0;font-size:.9rem
         <h2>My Certificates</h2>
         <p>Click on any certificate to view it in full size.</p>
       </header>
+
       <div class="cert-grid">
-    <button type="button" class="cert rv" data-title="Python Essentials 1">
-        <div class="cert-thumb">
-            <img src="wp-content/uploads/2017/06/essetia.png"
-                 alt="Python Essentials 1 certificate"
-                 loading="lazy">
-        </div>
-        <div class="cert-info">
+
+        <!-- PYTHON ESSENTIALS 1 -->
+        <button type="button" class="cert rv" data-title="Python Essentials 1">
+          <span class="cert-thumb" data-hint="Image not found">
+            <img src="wp-content/uploads/2017/06/essetia.png" alt="Python Essentials 1 certificate" loading="lazy" decoding="async">
+          </span>
+          <span class="cert-info">
             <span class="badge">Technical Training</span>
-            <h3>Python Essentials 1</h3>
-            <p>Foundational programming knowledge in Python, including fundamental concepts and logical thinking.</p>
-        </div>
-    </button>
+            <span class="cert-title">Python Essentials 1</span>
+            <span class="cert-desc">Foundational programming knowledge in Python, including fundamental concepts and logical thinking.</span>
+          </span>
+        </button>
 
-    <button type="button" class="cert rv" data-title="Microsoft Excel Specialist">
-        <div class="cert-thumb">
-            <img src="wp-content/uploads/2017/06/associat.png"
-                 alt="Microsoft Excel Specialist certificate"
-                 loading="lazy">
-        </div>
-        <div class="cert-info">
+        <!-- MICROSOFT EXCEL SPECIALIST -->
+        <button type="button" class="cert rv" data-title="Microsoft Excel Specialist">
+          <span class="cert-thumb" data-hint="Image not found">
+            <img src="wp-content/uploads/2017/06/associat.png" alt="Microsoft Excel Specialist certificate" loading="lazy" decoding="async">
+          </span>
+          <span class="cert-info">
             <span class="badge">Certification</span>
-            <h3>Microsoft Excel Specialist</h3>
-            <p>Practical knowledge of spreadsheet tools, formulas, and structured data management.</p>
-        </div>
-    </button>
+            <span class="cert-title">Microsoft Excel Specialist</span>
+            <span class="cert-desc">Practical knowledge of spreadsheet tools, formulas, and structured data management.</span>
+          </span>
+        </button>
 
-    <button type="button" class="cert rv" data-title="Microsoft Excel Expert">
-        <div class="cert-thumb">
-            <img src="wp-content/uploads/2017/06/speciaist.png"
-                 alt="Microsoft Excel Expert certificate"
-                 loading="lazy">
-        </div>
-        <div class="cert-info">
+        <!-- MICROSOFT EXCEL EXPERT -->
+        <button type="button" class="cert rv" data-title="Microsoft Excel Expert">
+          <span class="cert-thumb" data-hint="Image not found">
+            <img src="wp-content/uploads/2017/06/speciaist.png" alt="Microsoft Excel Expert certificate" loading="lazy" decoding="async">
+          </span>
+          <span class="cert-info">
             <span class="badge">Certification</span>
-            <h3>Microsoft Excel Expert</h3>
-            <p>Advanced spreadsheet skills, data management, and productivity tools using Microsoft Excel.</p>
-        </div>
-    </button>
+            <span class="cert-title">Microsoft Excel Expert</span>
+            <span class="cert-desc">Advanced spreadsheet skills, data management, and productivity tools using Microsoft Excel.</span>
+          </span>
+        </button>
 
-    <button type="button" class="cert rv" data-title="TOEIC Listening and Writing">
-        <div class="cert-thumb">
-            <img src="wp-content/uploads/2017/06/toic.png"
-                 alt="TOEIC Listening and Writing certificate"
-                 loading="lazy">
-        </div>
-        <div class="cert-info">
+        <!-- TOEIC LISTENING AND WRITING -->
+        <button type="button" class="cert rv" data-title="TOEIC Listening and Writing">
+          <span class="cert-thumb" data-hint="Image not found">
+            <img src="wp-content/uploads/2017/06/toic.png" alt="TOEIC Listening and Writing certificate" loading="lazy" decoding="async">
+          </span>
+          <span class="cert-info">
             <span class="badge">English Proficiency</span>
-            <h3>TOEIC Listening and Writing</h3>
-            <p>Standardized English assessment. Score: 875.</p>
-        </div>
-    </button>
-</div>
+            <span class="cert-title">TOEIC Listening and Writing</span>
+            <span class="cert-desc">Standardized English assessment. Score: 875.</span>
+          </span>
+        </button>
+
+      </div>
     </div>
   </section>
 
@@ -562,7 +563,7 @@ footer.site{background:var(--ink);color:#aaa69c;padding:56px 0 0;font-size:.9rem
         <p>Aspiring engineer focused on science, mathematics, and technology.</p>
       </div>
       <nav aria-label="Footer">
-        <a href="index.html">Home</a>
+        <a href="mainindex.html">Home</a>
         <a href="#skills">Skills</a>
         <a href="#certificates">Certificates</a>
         <a href="#contact">Contact</a>
@@ -574,60 +575,81 @@ footer.site{background:var(--ink);color:#aaa69c;padding:56px 0 0;font-size:.9rem
   <div class="copy">Copyright © <span id="yr">2026</span> All Rights Reserved by Ahyram Martínez</div>
 </footer>
 
-<button id="top" aria-label="Back to top">↑</button>
+<button type="button" id="top" aria-label="Back to top">↑</button>
 
 <script>
 (function(){
   'use strict';
   var d=document,b=d.body; b.classList.remove('no-js');
-  var nav=d.getElementById('nav'),bar=d.getElementById('progress'),top=d.getElementById('top');
+  var nav=d.getElementById('nav'),bar=d.getElementById('progress'),topBtn=d.getElementById('top');
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   d.getElementById('yr').textContent=new Date().getFullYear();
 
+  /* scroll: progress bar, sticky header, back-to-top */
   function onScroll(){
-    var y=window.pageYOffset,h=d.documentElement.scrollHeight-innerHeight;
+    var y=window.pageYOffset,h=d.documentElement.scrollHeight-window.innerHeight;
     bar.style.width=(h>0?y/h*100:0)+'%';
     nav.classList.toggle('scrolled',y>40);
-    top.classList.toggle('show',y>700);
+    topBtn.classList.toggle('show',y>700);
   }
-  addEventListener('scroll',onScroll,{passive:true}); onScroll();
-  top.addEventListener('click',function(){scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  topBtn.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce?'auto':'smooth'})});
 
+  /* mobile menu */
   var burger=d.getElementById('burger'),menu=d.getElementById('menu');
-  burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o);});
-  menu.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');}});
+  burger.addEventListener('click',function(){
+    var o=menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded',String(o));
+  });
+  menu.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');}
+  });
 
-  /* reveal */
+  /* reveal on scroll */
   var rv=d.querySelectorAll('.rv');
   if('IntersectionObserver' in window && !reduce){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
-    rv.forEach(function(el,i){el.style.transitionDelay=((i%3)*90)+'ms';io.observe(el);});
-  } else { rv.forEach(function(el){el.classList.add('in')}); }
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el,i){el.style.animationDelay=((i%3)*90)+'ms';io.observe(el);});
+  } else {
+    rv.forEach(function(el){el.classList.add('in');});
+  }
 
-  /* certificate images: try several extensions, fall back to placeholder */
-  var exts=['.jpg','.jpeg','.png','.webp'];
-  d.querySelectorAll('.cert-thumb img').forEach(function(img){
-    var base=img.getAttribute('data-base'),n=0;
-    function next(){
-      if(n<exts.length){img.src=base+exts[n++];}
-      else{img.onerror=null;img.removeAttribute('src');img.parentNode.classList.add('missing');}
-    }
-    img.onerror=next; next();
+  /* certificate images: show a placeholder if an image fails to load */
+  d.querySelectorAll('.cert-thumb').forEach(function(t){
+    var img=t.querySelector('img');
+    function fail(){t.classList.add('missing');}
+    img.addEventListener('error',fail);
+    if(img.complete && img.naturalWidth===0 && img.getAttribute('src')){fail();}
   });
 
   /* lightbox */
-  var lb=d.getElementById('lightbox'),lbImg=lb.querySelector('img'),lbCap=lb.querySelector('figcaption');
-  function closeLb(){lb.classList.remove('open');b.style.overflow='';}
+  var lb=d.getElementById('lightbox'),lbImg=lb.querySelector('img'),lbCap=lb.querySelector('figcaption'),lbClose=d.getElementById('lbClose');
+  var lastFocus=null;
+  function openLb(c){
+    var t=c.querySelector('.cert-thumb'),im=t.querySelector('img');
+    if(t.classList.contains('missing'))return;
+    lastFocus=c;
+    lbImg.src=im.currentSrc||im.src;
+    lbImg.alt=im.alt;
+    lbCap.textContent=c.getAttribute('data-title');
+    lb.classList.add('open');
+    b.style.overflow='hidden';
+    lbClose.focus();
+  }
+  function closeLb(){
+    lb.classList.remove('open');
+    b.style.overflow='';
+    if(lastFocus){lastFocus.focus();lastFocus=null;}
+  }
   d.querySelectorAll('.cert').forEach(function(c){
-    c.addEventListener('click',function(){
-      var t=c.querySelector('.cert-thumb'),im=t.querySelector('img');
-      if(t.classList.contains('missing'))return;
-      lbImg.src=im.currentSrc||im.src;lbImg.alt=im.alt;lbCap.textContent=c.getAttribute('data-title');
-      lb.classList.add('open');b.style.overflow='hidden';
-    });
+    c.addEventListener('click',function(){openLb(c);});
   });
   lb.addEventListener('click',function(e){if(e.target!==lbImg)closeLb();});
-  d.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+  d.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))closeLb();});
 })();
 </script>
 </body>
